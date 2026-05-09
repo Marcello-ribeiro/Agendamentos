@@ -1,0 +1,803 @@
+@charset "UTF-8";
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+html{
+     scroll-behavior: smooth; 
+}
+
+body{ 
+    background-image: linear-gradient(to top, rgb(29, 29, 65), black); color: rgb(138, 138, 245);
+    min-height: 100vh; 
+}
+
+
+header{
+    justify-items: center;
+    display: block;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+.navegacao a{
+    color: rgb(138, 138, 245);
+    text-decoration: none;
+}
+
+/* LOGO */
+.logo{
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.logo a{
+    text-decoration: none;
+    color: rgb(138, 138, 245);
+}
+
+
+/* MENU */
+ul{
+    display: flex;
+    gap: 60px;
+}
+
+li{
+    list-style: none;
+    cursor: pointer;
+}
+
+/* BOTÃO */
+.agendar-nv{
+    padding: 8px 16px;
+    border: none;
+    background:rgb(115, 115, 235);
+    color: black;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.agendar-nv a{
+text-decoration: none;
+color: white;
+} 
+
+.font-autor{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    letter-spacing: 6px;
+    color: lightgray;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+.agende{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.6em;
+    color: white;
+    padding-bottom: 20px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.agende span{
+    color: #7b7ae9;
+}
+
+
+.spanss span{
+    color: #7b7ae9;
+}
+
+.spanss h2{
+    color: white;
+}
+
+.dia{
+    font-size: 1.2em;
+    text-align: center;
+    color: lightgray;
+}
+
+.botoes{
+    padding-top: 40px;
+    display: flex;
+    gap: 30px;
+}
+
+.fz-agendamento{
+    padding: 18px;
+    width: 195px;
+    background: #7b7ae9;
+    border-style: none;
+    border-radius: 28px;
+    cursor: pointer;
+    color: white;
+    transition: background 0.5s;
+}
+
+.fz-agendamento:hover{
+    background: rgb(68, 103, 216);
+}
+
+.zap{
+    
+    padding: 10px;
+    color: lightgray;
+    background: #ffffff00;
+    border-style: none;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: color 0.5s;
+}
+
+.zap:hover{
+    color: rgb(80, 112, 216);
+}
+
+.trabalhos{
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    font-size: .7em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    font-size: 0.5em;
+}
+
+section h2{
+    text-align: center;
+
+    font-size: 52px;
+    font-weight: 400;
+
+    margin-bottom: 14px;
+
+    font-family: 'Cormorant Garamond', serif;
+}
+
+section p{
+    text-align: center;
+
+    font-size: 18px;
+    color: #9c9c9c;
+
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.galeria{
+    max-width: 1100px;
+    margin: 60px auto 0;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 405px 405px;
+    gap: 20px;
+    padding-bottom: 30px;
+   
+}
+
+/* CARD */
+
+.foto-card{
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    height: 100%;
+}
+
+/* PRIMEIRO CARD GRANDE */
+
+.foto-card:first-child{
+    grid-row: 1 / 3;
+}
+
+/* CARROSSEL */
+
+.carrossel{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* IMAGENS */
+
+.foto-card img,
+.foto-card a{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.carrossel img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.8s;
+    display: none;
+}
+
+
+.carrossel img:hover{
+    transform: scale(1.1);
+}
+
+
+.carrossel img.ativo{
+    display: block;
+}
+
+/* POSIÇÃO DAS IMAGENS */
+
+
+
+.foto-card:first-child img{
+    object-position: center;
+}
+
+.foto-card:nth-child(1) .carrossel img:nth-child(1){
+    object-position: center 1%;
+}
+.foto-card:nth-child(2) .carrossel img:nth-child(1){
+    object-position: center center;
+}
+
+.foto-card:nth-child(2) .carrossel img:nth-child(2){
+    object-position: center 70%;
+}
+
+.foto-card:nth-child(3) .carrossel img:nth-child(1){
+    object-position: center bottom;
+}
+
+.foto-card:nth-child(3) .carrossel img:nth-child(2){
+    object-position: center center;
+}
+
+/* ESCURECER FUNDO */
+
+.foto-card::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,.78),
+        transparent 55%
+    );
+
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* TEXOS */
+
+.foto-info{
+    position: absolute;
+    left: 20px;
+    bottom: 22px;
+
+    z-index: 2;
+    color: white;
+}
+
+.foto-info p{
+    margin: 0 0 8px;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+
+    color: #b78cff;
+}
+
+.foto-info h3{
+    margin: 0;
+
+    font-size: 22px;
+    font-weight: 400;
+
+    color: white;
+
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* BOTÕES */
+
+.prev,
+.next{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    z-index: 3;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0,0,0,.45);
+
+    color: white;
+    font-size: 28px;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.prev:hover,
+.next:hover{
+    background: rgba(0,0,0,.7);
+}
+
+.prev{
+    left: 14px;
+}
+
+.next{
+    right: 14px;
+}
+
+.lzz{
+    font-size: 0.3em;
+}
+
+.galeria-baixo{
+    max-width: 1100px;
+    margin: 20px auto 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.quadrado{
+    aspect-ratio: 1 / 1;
+    height: auto;
+}
+
+.quadrado .carrossel{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.quadrado .carrossel img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    display: none;
+}
+
+.quadrado .carrossel img.ativo{
+    display: block;
+}
+/*OUTROS*/
+
+.quadrado:nth-child(1) .carrossel img:nth-child(1){
+    object-position: center 80% ;
+}
+
+.quadrado:nth-child(1) .carrossel img:nth-child(2){
+    object-position: center 15% ;
+}
+
+.quadrado:nth-child(1) .carrossel img:nth-child(3){
+    object-position: center 79% ;
+}
+
+.quadrado:nth-child(1) .carrossel img:nth-child(4){
+    object-position: center 30% ;
+}
+
+.quadrado:nth-child(1) .carrossel img:nth-child(5){
+    object-position: center 35% ;
+}
+
+
+
+/*GOLEIROS*/
+
+.quadrado:nth-child(2) .carrossel img:nth-child(1){
+    object-position: center bottom ;
+}
+
+.quadrado:nth-child(2) .carrossel img:nth-child(2){
+    object-position: center 58% ;
+}
+
+/*PEGA*/
+
+.quadrado:nth-child(3) .carrossel img:nth-child(1){
+    object-position: center ;
+}
+
+.quadrado:nth-child(3) .carrossel img:nth-child(2){
+    object-position: center 24%;
+}
+.quadrado:nth-child(3) .carrossel img:nth-child(3){
+    object-position: center 65%;
+}
+.quadrado:nth-child(3) .carrossel img:nth-child(4){
+    object-position: center 35%;
+}
+
+
+
+.agendamento{
+    background: #050507;
+    padding: 80px 20px;
+}
+
+.form-agendamento{
+    max-width: 900px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 54px;
+}
+
+.campo{
+    display: flex;
+    flex-direction: column;
+}
+
+.campo.full{
+    grid-column: 1 / 3;
+}
+
+.campo label{
+    margin-bottom: 8px;
+
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: #9ca3bf;
+}
+
+.campo input,
+.campo select,
+.campo textarea{
+    width: 100%;
+
+    background: #101014;
+    border: 1px solid #27272f;
+    border-radius: 12px;
+
+    padding: 16px 18px;
+
+    color: white;
+    font-size: 15px;
+
+    outline: none;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder{
+    color: #8b8fa6;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus{
+    border-color: #9b5cff;
+}
+
+.campo textarea{
+    height: 90px;
+    resize: none;
+}
+
+.btn-confirmar{
+    grid-column: 1 / 3;
+
+    padding: 18px;
+    border: none;
+    border-radius: 999px;
+
+    background: #965cff;
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-confirmar:hover{
+    background: #7b3cff;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+
+.footer{
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(138, 138, 245, 0.2);
+    padding: 60px 8%;
+    color: white;
+}
+
+.footer-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.footer-logo h2{
+    font-size: 42px;
+    color: rgb(138, 138, 245);
+    margin-bottom: 10px;
+    letter-spacing: 4px;
+}
+
+.footer-logo p{
+    max-width: 320px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+}
+
+.footer-links,
+.footer-social{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links h3,
+.footer-social h3{
+    color: rgb(138, 138, 245);
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.footer-links a,
+.footer-social a{
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-links a:hover,
+.footer-social a:hover{
+    color: rgb(138, 138, 245);
+    transform: translateX(5px);
+}
+
+.footer-bottom{
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+}
+
+.footer-bottom p{
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 768px){
+
+    .footer-container{
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .footer-logo h2{
+        font-size: 34px;
+    }
+
+}
+
+
+@media (max-width: 768px){
+.logo{
+    font-size: 13px;
+}
+    nav{
+        padding: 14px 16px;
+        gap: 20px;
+    }
+
+    ul{
+        gap: 22px;
+        font-size: 13px;
+    }
+
+    .agendar-nv{
+        padding: 7px 14px;
+        font-size: 10px;
+    }
+
+    .font-autor{
+        font-size: 0.55em;
+        letter-spacing: 5px;
+        padding-top: 5px;
+        padding-bottom: 70px;
+    }
+
+    .agende{
+        font-size: 2.1em;
+        text-align: center;
+        padding-bottom: 0px;
+    }
+    .dia{
+        font-size: 0.89em;
+        padding-top: 10px;
+    }
+
+    .botoes{
+        justify-content: center;
+        gap: 18px;
+    
+    }
+
+    .fz-agendamento{
+        width: 170px;
+        padding: 15px;
+    }
+
+    .trabalhos{
+        padding-top: 100px;
+        padding-bottom: 10px;
+    }
+    
+    section h2{
+        font-size: 40px;
+    }
+
+    section p{
+        font-size: 15px;
+        margin-bottom: 45px;
+    }
+
+   .galeria{
+    width: calc(100% - 28px);
+    max-width: 1100px;
+    margin: 45px auto 0;
+
+    grid-template-columns: 1.55fr 1fr;
+    grid-template-rows: 175px 175px;
+    gap: 12px;
+}
+
+    .foto-card{
+        border-radius: 12px;
+    }
+
+    .foto-card:first-child{
+        grid-row: 1 / 3;
+    }
+
+.galeria-baixo{
+    width: calc(100% - 28px);
+    max-width: 1100px;
+    margin: 12px auto 0;
+
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+    .foto-info{
+        left: 14px;
+        bottom: 16px;
+    }
+
+    .foto-info p{
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+    .foto-info h3{
+        font-size: 16px;
+    }
+
+    .prev,
+    .next{
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+    }
+
+        .prev,
+        .next{
+        width: 19px;
+        height: 19px;
+        font-size: 10px;
+        padding: 0;
+    }}
+
+    .agendamento{
+        padding: 70px 16px;
+    }
+
+    .form-agendamento{
+        max-width: 900px;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px 18px;
+    }
+
+    .campo input,
+    .campo select,
+    .campo textarea{
+        padding: 14px;
+        font-size: 14px;
+    }
+
+        .footer{
+        padding: 50px 30px;
+        margin-top: 0;
+    }
+
+    .footer-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .footer-logo h2{
+        font-size: 26px;
+    }
+
+    .footer-logo p{
+        font-size: 13px;
+        max-width: 180px;
+        line-height: 1.5;
+    }
+
+    .footer-links h3,
+    .footer-social h3{
+        font-size: 16px;
+    }
+
+    .footer-links a,
+    .footer-social a{
+        font-size: 13px;
+    }
+
+    .footer-bottom{
+        margin-top: 35px;
+    }
+
+    .footer-bottom p{
+        font-size: 11px;
+    }
+    
+}
+
