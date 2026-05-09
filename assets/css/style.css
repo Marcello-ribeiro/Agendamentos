@@ -642,12 +642,16 @@ section p{
         padding: 7px 14px;
         font-size: 10px;
     }
+    header{
+        text-align: center;
+    }
 
     .font-autor{
         font-size: 0.55em;
         letter-spacing: 5px;
         padding-top: 5px;
         padding-bottom: 70px;
+        text-align: center;
     }
 
     .agende{
