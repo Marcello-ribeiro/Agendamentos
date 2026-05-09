@@ -717,6 +717,21 @@ section p{
         bottom: 16px;
     }
 
+
+
+.foto-info p{
+    font-size: 6px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+}
+
+.foto-info h3{
+    font-size: 11px;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
     .foto-info p{
         font-size: 8px;
         letter-spacing: 3px;
@@ -799,5 +814,5 @@ section p{
         font-size: 11px;
     }
     
-}
+
 
