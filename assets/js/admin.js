@@ -8,7 +8,7 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const lista = document.querySelector(".lista-agendamentos");
 const botoesFiltro = document.querySelectorAll(".filtros button");
 
-let filtroAtual = "principal";
+let filtroAtual = "pendentes";
 let confirmCallback = null;
 let dadosRecusa = null;
 
@@ -40,15 +40,20 @@ async function carregarAgendamentos(){
 
     let agendamentos = data;
 
-    if(filtroAtual === "principal"){
-        agendamentos = data.filter(item =>
-            item.status === "pendente" ||
-            item.status === "confirmado"
-        );
+    if(filtroAtual === "pendentes"){
+        agendamentos = data.filter(item => item.status === "pendente");
     }
 
-    if(filtroAtual !== "todos" && filtroAtual !== "principal"){
-        agendamentos = data.filter(item => item.status === filtroAtual);
+    if(filtroAtual === "confirmados"){
+        agendamentos = data.filter(item => item.status === "confirmado");
+    }
+
+    if(filtroAtual === "cancelados"){
+        agendamentos = data.filter(item => item.status === "cancelado");
+    }
+
+    if(filtroAtual === "feitos"){
+        agendamentos = data.filter(item => item.status === "feito");
     }
 
     lista.innerHTML = "";
@@ -164,30 +169,26 @@ botoesFiltro.forEach(botao => {
         botoesFiltro.forEach(btn => btn.classList.remove("ativo"));
         botao.classList.add("ativo");
 
-        const texto = botao.innerText.toLowerCase();
-
-        if(texto === "principal"){
-            filtroAtual = "principal";
-        }
+        const texto = botao.innerText.toLowerCase().trim();
 
         if(texto === "todos"){
             filtroAtual = "todos";
         }
 
         if(texto === "pendentes"){
-            filtroAtual = "pendente";
+            filtroAtual = "pendentes";
         }
 
         if(texto === "confirmados"){
-            filtroAtual = "confirmado";
+            filtroAtual = "confirmados";
         }
 
         if(texto === "cancelados"){
-            filtroAtual = "cancelado";
+            filtroAtual = "cancelados";
         }
 
         if(texto === "feitos"){
-            filtroAtual = "feito";
+            filtroAtual = "feitos";
         }
 
         carregarAgendamentos();
@@ -301,11 +302,13 @@ function limparNumero(whatsapp){
 }
 
 function abrirWhatsApp(numero, mensagem){
-    const url =
-    `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
-    window.open(url, "_blank");
+    window.location.href = url;
 }
+
+
+// CONFIRMAR AGENDAMENTO
 
 async function confirmarAgendamento(id, nome, whatsapp, dia, hora, local){
 
@@ -371,6 +374,11 @@ document
         return;
     }
 
+    if(!dadosRecusa){
+        abrirAviso("Erro ao carregar dados da recusa.");
+        return;
+    }
+
     const {
         id,
         nome,
@@ -397,9 +405,8 @@ ${motivo}
 
 Caso queira remarcar, pode entrar em contato novamente.`;
 
-    abrirWhatsApp(numero, mensagem);
-
     fecharModalMotivo();
+    abrirWhatsApp(numero, mensagem);
 
 });
 
