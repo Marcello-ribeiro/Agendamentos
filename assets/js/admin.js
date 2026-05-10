@@ -8,8 +8,9 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const lista = document.querySelector(".lista-agendamentos");
 const botoesFiltro = document.querySelectorAll(".filtros button");
 
-let filtroAtual = "todos";
+let filtroAtual = "principal";
 let confirmCallback = null;
+let dadosRecusa = null;
 
 
 // LOGIN
@@ -39,21 +40,48 @@ async function carregarAgendamentos(){
 
     let agendamentos = data;
 
-    if(filtroAtual !== "todos"){
+    if(filtroAtual === "principal"){
+        agendamentos = data.filter(item =>
+            item.status === "pendente" ||
+            item.status === "confirmado"
+        );
+    }
+
+    if(filtroAtual !== "todos" && filtroAtual !== "principal"){
         agendamentos = data.filter(item => item.status === filtroAtual);
     }
 
     lista.innerHTML = "";
 
-    let total = data.length;
-    let pendentes = data.filter(item => item.status === "pendente").length;
-    let confirmados = data.filter(item => item.status === "confirmado").length;
+    const total = data.length;
+    const pendentes = data.filter(item => item.status === "pendente").length;
+    const confirmados = data.filter(item => item.status === "confirmado").length;
 
     document.getElementById("totalAgendamentos").innerText = total;
     document.getElementById("totalPendentes").innerText = pendentes;
     document.getElementById("totalConfirmados").innerText = confirmados;
 
+    if(agendamentos.length === 0){
+        lista.innerHTML = `
+            <div class="agendamento-card">
+                <h2>Nenhum agendamento encontrado</h2>
+                <div class="info">
+                    <p>Não existem agendamentos nesse filtro.</p>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
     agendamentos.forEach(item => {
+
+        const nome = escaparTexto(item.nome);
+        const whatsapp = escaparTexto(item.whatsapp);
+        const tipo = escaparTexto(item.tipo);
+        const dia = escaparTexto(item.dia);
+        const hora = escaparTexto(item.hora);
+        const local = escaparTexto(item.local || "");
+        const obs = escaparTexto(item.obs || "");
 
         lista.innerHTML += `
             <div class="agendamento-card">
@@ -64,29 +92,29 @@ async function carregarAgendamentos(){
                     </span>
 
                     <span class="data">
-                        ${item.dia} • ${item.hora}
+                        ${dia} • ${hora}
                     </span>
                 </div>
 
-                <h2>${item.nome}</h2>
+                <h2>${nome}</h2>
 
                 <div class="info">
-                    <p><strong>WhatsApp:</strong> ${item.whatsapp}</p>
-                    <p><strong>Tipo:</strong> ${item.tipo}</p>
-                    <p><strong>Local:</strong> ${item.local || "Não informado"}</p>
-                    <p><strong>Obs:</strong> ${item.obs || "Nenhuma"}</p>
+                    <p><strong>WhatsApp:</strong> ${whatsapp}</p>
+                    <p><strong>Tipo:</strong> ${tipo}</p>
+                    <p><strong>Local:</strong> ${local || "Não informado"}</p>
+                    <p><strong>Obs:</strong> ${obs || "Nenhuma"}</p>
                 </div>
 
                 <div class="acoes">
 
                     <button class="confirmar"
-                        onclick="alterarStatus(${item.id}, 'confirmado')">
+                        onclick="confirmarAgendamento(${item.id}, '${nome}', '${whatsapp}', '${dia}', '${hora}', '${local}')">
                         Confirmar
                     </button>
 
                     <button class="cancelar"
-                        onclick="alterarStatus(${item.id}, 'cancelado')">
-                        Cancelar
+                        onclick="cancelarAgendamento(${item.id}, '${nome}', '${whatsapp}', '${dia}', '${hora}')">
+                        Recusar
                     </button>
 
                     <button class="feito"
@@ -119,10 +147,11 @@ async function alterarStatus(id, status){
     if(error){
         abrirAviso("Erro ao alterar status.");
         console.log(error);
-        return;
+        return false;
     }
 
     carregarAgendamentos();
+    return true;
 }
 
 
@@ -136,6 +165,10 @@ botoesFiltro.forEach(botao => {
         botao.classList.add("ativo");
 
         const texto = botao.innerText.toLowerCase();
+
+        if(texto === "principal"){
+            filtroAtual = "principal";
+        }
 
         if(texto === "todos"){
             filtroAtual = "todos";
@@ -151,6 +184,10 @@ botoesFiltro.forEach(botao => {
 
         if(texto === "cancelados"){
             filtroAtual = "cancelado";
+        }
+
+        if(texto === "feitos"){
+            filtroAtual = "feito";
         }
 
         carregarAgendamentos();
@@ -244,13 +281,153 @@ document.getElementById("confirm-cancel").addEventListener("click", () => {
 
 });
 
-
-// MODAL DE AVISO SIMPLES
-
 function abrirAviso(mensagem){
 
     abrirConfirmacao(mensagem, () => {});
 
+}
+
+
+// WHATSAPP
+
+function limparNumero(whatsapp){
+    let numero = String(whatsapp).replace(/\D/g, "");
+
+    if(!numero.startsWith("55")){
+        numero = "55" + numero;
+    }
+
+    return numero;
+}
+
+function abrirWhatsApp(numero, mensagem){
+    const url =
+    `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+    window.open(url, "_blank");
+}
+
+async function confirmarAgendamento(id, nome, whatsapp, dia, hora, local){
+
+    const atualizado = await alterarStatus(id, "confirmado");
+
+    if(!atualizado){
+        return;
+    }
+
+    const numero = limparNumero(whatsapp);
+
+    const mensagem =
+`Olá, ${nome}! Seu agendamento com a LZZ SportShot foi confirmado.
+
+Data: ${dia}
+Horário: ${hora}
+Local: ${local || "A combinar"}
+
+Qualquer dúvida, pode falar por aqui.`;
+
+    abrirWhatsApp(numero, mensagem);
+}
+
+
+// RECUSAR COM MOTIVO
+
+async function cancelarAgendamento(id, nome, whatsapp, dia, hora){
+
+    dadosRecusa = {
+        id,
+        nome,
+        whatsapp,
+        dia,
+        hora
+    };
+
+    document
+        .getElementById("motivo-overlay")
+        .classList
+        .add("ativo");
+
+}
+
+document
+.getElementById("motivo-cancelar")
+.addEventListener("click", () => {
+
+    fecharModalMotivo();
+
+});
+
+document
+.getElementById("motivo-enviar")
+.addEventListener("click", async () => {
+
+    const motivo =
+    document.getElementById("motivo-texto")
+    .value
+    .trim();
+
+    if(!motivo){
+        abrirAviso("Digite o motivo da recusa.");
+        return;
+    }
+
+    const {
+        id,
+        nome,
+        whatsapp,
+        dia,
+        hora
+    } = dadosRecusa;
+
+    const atualizado = await alterarStatus(id, "cancelado");
+
+    if(!atualizado){
+        return;
+    }
+
+    const numero = limparNumero(whatsapp);
+
+    const mensagem =
+`Olá, ${nome}.
+
+Seu agendamento para ${dia} às ${hora} foi recusado/cancelado.
+
+Motivo:
+${motivo}
+
+Caso queira remarcar, pode entrar em contato novamente.`;
+
+    abrirWhatsApp(numero, mensagem);
+
+    fecharModalMotivo();
+
+});
+
+function fecharModalMotivo(){
+
+    document
+        .getElementById("motivo-overlay")
+        .classList
+        .remove("ativo");
+
+    document
+        .getElementById("motivo-texto")
+        .value = "";
+
+    dadosRecusa = null;
+
+}
+
+
+// SEGURANÇA SIMPLES PARA TEXTOS NO HTML
+
+function escaparTexto(texto){
+    return String(texto)
+        .replaceAll("\\", "\\\\")
+        .replaceAll("'", "\\'")
+        .replaceAll('"', "&quot;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
 }
 
 

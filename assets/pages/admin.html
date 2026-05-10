@@ -47,11 +47,13 @@
             </div>
         </section>
 
-        <section class="filtros">
-            <button class="ativo">Todos</button>
+      <section class="filtros">
+            <button class="ativo">Principal</button>
             <button>Pendentes</button>
             <button>Confirmados</button>
             <button>Cancelados</button>
+            <button>Feitos</button>
+            <button>Todos</button>
         </section>
 
         <section class="lista-agendamentos">
@@ -118,6 +120,34 @@
 
             <button id="confirm-cancel">
                 Cancelar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="motivo-overlay" class="motivo-overlay">
+
+    <div class="motivo-box">
+
+        <h3>Motivo da recusa</h3>
+
+        <textarea
+            id="motivo-texto"
+            placeholder="Digite o motivo para o cliente..."
+        ></textarea>
+
+        <div class="motivo-botoes">
+
+            <button id="motivo-cancelar">
+                Cancelar
+            </button>
+
+            <button id="motivo-enviar">
+                Continuar
             </button>
 
         </div>
