@@ -1,0 +1,286 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    background: linear-gradient(to top, rgb(29, 29, 65), black);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* HEADER */
+
+.admin-header{
+    width: 100%;
+    padding: 22px 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    color: rgb(138, 138, 245);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.admin-header nav{
+    display: flex;
+    gap: 35px;
+    align-items: center;
+}
+
+.admin-header nav a{
+    color: rgb(138, 138, 245);
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.sair{
+    background: rgb(117, 111, 229);
+    color: white !important;
+    padding: 9px 22px;
+    border-radius: 30px;
+}
+
+/* MAIN */
+
+.admin-main{
+    width: 90%;
+    max-width: 1150px;
+    margin: auto;
+    padding-bottom: 80px;
+}
+
+/* HERO */
+
+.hero-admin{
+    text-align: center;
+    padding: 55px 0 45px;
+}
+
+.subtitulo{
+    letter-spacing: 9px;
+    font-size: 12px;
+    color: white;
+    margin-bottom: 35px;
+}
+
+.hero-admin h1{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4em;
+    font-weight: 400;
+}
+
+.hero-admin h1 span{
+    color: rgb(138, 138, 245);
+}
+
+.descricao{
+    margin-top: 12px;
+    font-size: 17px;
+    color: #ddd;
+}
+
+/* RESUMO */
+
+.resumo{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 35px;
+}
+
+.card-resumo{
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(138, 138, 245, 0.25);
+    border-radius: 22px;
+    padding: 24px;
+    text-align: center;
+}
+
+.card-resumo h3{
+    color: #ccc;
+    font-size: 15px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+.card-resumo p{
+    font-size: 36px;
+    color: rgb(138, 138, 245);
+    font-weight: bold;
+}
+
+/* FILTROS */
+
+.filtros{
+    display: flex;
+    gap: 14px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+
+.filtros button{
+    border: 1px solid rgba(138, 138, 245, 0.4);
+    background: transparent;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.filtros button.ativo,
+.filtros button:hover{
+    background: rgb(117, 111, 229);
+    border-color: rgb(117, 111, 229);
+}
+
+/* CARDS */
+
+.lista-agendamentos{
+    display: grid;
+    gap: 22px;
+}
+
+.agendamento-card{
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(138, 138, 245, 0.25);
+    border-radius: 24px;
+    padding: 26px;
+}
+
+.agendamento-topo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    gap: 15px;
+}
+
+.status{
+    padding: 7px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status.pendente{
+    background: rgba(255, 193, 7, 0.15);
+    color: #ffcf4a;
+}
+
+.status.confirmado{
+    background: rgba(0, 255, 140, 0.13);
+    color: #44ff9a;
+}
+
+.status.cancelado{
+    background: rgba(255, 70, 70, 0.15);
+    color: #ff6262;
+}
+
+.data{
+    color: #ccc;
+    font-size: 14px;
+}
+
+.agendamento-card h2{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.1em;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.info{
+    display: grid;
+    gap: 8px;
+    color: #ddd;
+    margin-bottom: 22px;
+}
+
+.info strong{
+    color: white;
+}
+
+/* BOTÕES */
+
+.acoes{
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.acoes button{
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+.confirmar{
+    background: #29b765;
+}
+
+.cancelar{
+    background: #d94343;
+}
+
+.feito{
+    background: rgb(117, 111, 229);
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 768px){
+
+    .admin-header{
+        padding: 18px 18px;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .admin-header nav{
+        gap: 22px;
+    }
+
+    .hero-admin{
+        padding-top: 40px;
+    }
+
+    .subtitulo{
+        letter-spacing: 5px;
+        font-size: 10px;
+    }
+
+    .hero-admin h1{
+        font-size: 2.8em;
+    }
+
+    .descricao{
+        font-size: 15px;
+    }
+
+    .resumo{
+        grid-template-columns: 1fr;
+    }
+
+    .agendamento-topo{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .acoes button{
+        width: 100%;
+    }
+}

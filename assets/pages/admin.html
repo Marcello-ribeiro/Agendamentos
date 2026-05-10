@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/adminstyle.css">
+    <link rel="shortcut icon" href="../midia/favicon.ico" type="image/x-icon">
+    <title>Painel Admin</title>
+
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+    <header class="admin-header">
+        <a href="../index.html" class="logo">@lzz.sportshot</a>
+
+        <nav>
+            <a href="../index.html">Voltar ao site</a>
+            <a href="#" class="sair">Sair</a>
+        </nav>
+    </header>
+
+    <main class="admin-main">
+
+        <section class="hero-admin">
+            <p class="subtitulo">— PAINEL ADMINISTRATIVO —</p>
+            <h1>Agendamentos <span>recebidos</span></h1>
+            <p class="descricao">
+                Veja os horários marcados, confirme sessões e acompanhe os eventos.
+            </p>
+        </section>
+
+        <section class="resumo">
+            <div class="card-resumo">
+                <h3>Total</h3>
+                <p id="totalAgendamentos">0</p>
+            </div>
+
+            <div class="card-resumo">
+                <h3>Pendentes</h3>
+                <p id="totalPendentes">0</p>
+            </div>
+
+            <div class="card-resumo">
+                <h3>Confirmados</h3>
+                <p id="totalConfirmados">0</p>
+            </div>
+        </section>
+
+        <section class="filtros">
+            <button class="ativo">Todos</button>
+            <button>Pendentes</button>
+            <button>Confirmados</button>
+            <button>Cancelados</button>
+        </section>
+
+        <section class="lista-agendamentos">
+
+            <div class="agendamento-card">
+                <div class="agendamento-topo">
+                    <span class="status pendente">Pendente</span>
+                    <span class="data">15/05/2026 • 16:00</span>
+                </div>
+
+                <h2>João Silva</h2>
+
+                <div class="info">
+                    <p><strong>WhatsApp:</strong> (82) 99999-9999</p>
+                    <p><strong>Local:</strong> Campo do CSA</p>
+                    <p><strong>Tipo:</strong> Jogo de futebol</p>
+                    <p><strong>Observação:</strong> Fotos durante o segundo tempo.</p>
+                </div>
+
+                <div class="acoes">
+                    <button class="confirmar">Confirmar</button>
+                    <button class="cancelar">Cancelar</button>
+                    <button class="feito">Feito</button>
+                </div>
+            </div>
+
+            <div class="agendamento-card">
+                <div class="agendamento-topo">
+                    <span class="status confirmado">Confirmado</span>
+                    <span class="data">18/05/2026 • 09:00</span>
+                </div>
+
+                <h2>Carlos Henrique</h2>
+
+                <div class="info">
+                    <p><strong>WhatsApp:</strong> (82) 98888-8888</p>
+                    <p><strong>Local:</strong> Arena Society</p>
+                    <p><strong>Tipo:</strong> Ensaio esportivo</p>
+                    <p><strong>Observação:</strong> Quer fotos individuais e em grupo.</p>
+                </div>
+
+                <div class="acoes">
+                    <button class="confirmar">Confirmar</button>
+                    <button class="cancelar">Cancelar</button>
+                    <button class="feito">Feito</button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+<script src="../js/admin.js"></script>
+</body>
+</html>
