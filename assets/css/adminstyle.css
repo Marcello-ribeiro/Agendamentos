@@ -129,6 +129,39 @@ body{
     font-weight: bold;
 }
 
+
+.recusar{
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.recusar:hover{
+    background: #dc2626;
+    transform: scale(1.03);
+}
+
+.cancelar{
+    background: #f59e0b;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.status.cancelado{
+    background: rgba(241, 20, 20, 0.315)
+    color: #fbbf24;
+}
+
+
 /* FILTROS */
 
 .filtros{
@@ -189,8 +222,8 @@ body{
 }
 
 .status.confirmado{
-    background: rgba(0, 255, 140, 0.13);
-    color: #44ff9a;
+    background: rgba(232, 235, 234, 0.13);
+    color: #44d3ff;
 }
 
 .status.cancelado{
@@ -198,9 +231,139 @@ body{
     color: #ff6262;
 }
 
+.status.recusado{
+    background: rgba(239, 68, 68, 0.18);
+    color: #ff6b6b;
+}
+
 .data{
     color: #ccc;
     font-size: 14px;
+}
+
+/* BOTÃO AVALIAÇÕES */
+
+.btn-avaliacoes{
+    padding: 10px 18px;
+    border: none;
+    border-radius: 12px;
+    background: #111;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 15px;
+}
+
+.btn-avaliacoes:hover{
+    opacity: 0.85;
+}
+
+.btn-avaliacoes.ativo{
+    background: #2563eb;
+}
+
+
+/* CARD AVALIAÇÃO */
+
+.avaliacao-card{
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.avaliacao-card p{
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+
+/* MODAL AVALIAÇÃO */
+
+.modal-avaliacao{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.modal-avaliacao.ativo{
+    display: flex;
+}
+
+.box-avaliacao{
+    width: 100%;
+    max-width: 420px;
+    background: #111827;
+    border-radius: 18px;
+    padding: 25px;
+    color: white;
+    box-shadow: 0 0 30px rgba(0,0,0,0.4);
+}
+
+.box-avaliacao h2{
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.box-avaliacao label{
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 14px;
+    font-weight: 600;
+}
+
+.box-avaliacao select,
+.box-avaliacao textarea{
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 12px;
+    background: #1f2937;
+    color: white;
+    font-size: 15px;
+}
+
+.box-avaliacao textarea{
+    resize: none;
+    min-height: 110px;
+}
+
+.acoes-avaliacao{
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.acoes-avaliacao button{
+    flex: 1;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+#cancelarAvaliacao{
+    background: #374151;
+    color: white;
+}
+
+#salvarAvaliacao{
+    background: #2563eb;
+    color: white;
+}
+
+.acoes-avaliacao button:hover{
+    opacity: 0.9;
 }
 
 .agendamento-card h2{
@@ -247,7 +410,7 @@ body{
 }
 
 .feito{
-    background: rgb(117, 111, 229);
+    background: rgba(65, 238, 42, 0.76);
 }
 
 /* RESPONSIVO */
@@ -404,7 +567,7 @@ body{
 
     transition: 0.3s;
 
-    z-index: 999999;
+    z-index: 100000;
 }
 
 .motivo-overlay.ativo{

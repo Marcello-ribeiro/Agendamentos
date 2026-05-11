@@ -8,9 +8,18 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const lista = document.querySelector(".lista-agendamentos");
 const botoesFiltro = document.querySelectorAll(".filtros button");
 
+const btnAvaliacoes = document.querySelector("#btnAvaliacoes");
+
+const modalAvaliacao = document.querySelector("#modalAvaliacao");
+const notaCliente = document.querySelector("#notaCliente");
+const avaliacaoCliente = document.querySelector("#avaliacaoCliente");
+const salvarAvaliacao = document.querySelector("#salvarAvaliacao");
+const cancelarAvaliacao = document.querySelector("#cancelarAvaliacao");
+
 let filtroAtual = "pendentes";
 let confirmCallback = null;
-let dadosRecusa = null;
+let dadosAcao = null;
+let agendamentoParaAvaliar = null;
 
 
 // LOGIN
@@ -48,12 +57,20 @@ async function carregarAgendamentos(){
         agendamentos = data.filter(item => item.status === "confirmado");
     }
 
+    if(filtroAtual === "recusados"){
+        agendamentos = data.filter(item => item.status === "recusado");
+    }
+
     if(filtroAtual === "cancelados"){
         agendamentos = data.filter(item => item.status === "cancelado");
     }
 
     if(filtroAtual === "feitos"){
         agendamentos = data.filter(item => item.status === "feito");
+    }
+
+    if(filtroAtual === "avaliacoes"){
+        agendamentos = data.filter(item => item.nota_cliente);
     }
 
     lista.innerHTML = "";
@@ -87,6 +104,8 @@ async function carregarAgendamentos(){
         const hora = escaparTexto(item.hora);
         const local = escaparTexto(item.local || "");
         const obs = escaparTexto(item.obs || "");
+        const motivo = escaparTexto(item.motivo || "");
+        const avaliacao = escaparTexto(item.avaliacao_cliente || "");
 
         lista.innerHTML += `
             <div class="agendamento-card">
@@ -108,29 +127,63 @@ async function carregarAgendamentos(){
                     <p><strong>Tipo:</strong> ${tipo}</p>
                     <p><strong>Local:</strong> ${local || "Não informado"}</p>
                     <p><strong>Obs:</strong> ${obs || "Nenhuma"}</p>
+
+                    ${
+                        item.status === "recusado" || item.status === "cancelado"
+                        ? `<p><strong>Motivo:</strong> ${motivo || "Não informado"}</p>`
+                        : ""
+                    }
+
+                    ${
+                        item.status === "feito" && item.nota_cliente
+                        ? `
+                            <div class="avaliacao-card">
+                                <p><strong>Avaliação:</strong> ${"⭐".repeat(item.nota_cliente)}</p>
+                                <p><strong>Comentário:</strong> ${avaliacao || "Sem comentário"}</p>
+                            </div>
+                        `
+                        : ""
+                    }
                 </div>
 
                 <div class="acoes">
 
-                    <button class="confirmar"
-                        onclick="confirmarAgendamento(${item.id}, '${nome}', '${whatsapp}', '${dia}', '${hora}', '${local}')">
-                        Confirmar
-                    </button>
+                    ${item.status === "pendente" ? `
+                        <button class="confirmar"
+                            onclick="confirmarAgendamento(${item.id}, '${nome}', '${whatsapp}', '${dia}', '${hora}', '${local}')">
+                            Confirmar
+                        </button>
 
-                    <button class="cancelar"
-                        onclick="cancelarAgendamento(${item.id}, '${nome}', '${whatsapp}', '${dia}', '${hora}')">
-                        Recusar
-                    </button>
+                        <button class="recusar"
+                            onclick="recusarAgendamento(${item.id}, '${nome}', '${whatsapp}', '${dia}', '${hora}')">
+                            Recusar
+                        </button>
+                    ` : ""}
 
-                    <button class="feito"
-                        onclick="alterarStatus(${item.id}, 'feito')">
-                        Já atendido
-                    </button>
+                    ${item.status === "confirmado" ? `
+                        <button class="cancelar"
+                            onclick="cancelarConfirmado(${item.id}, '${nome}', '${whatsapp}', '${dia}', '${hora}')">
+                            Cancelar
+                        </button>
 
-                    <button class="excluir"
-                        onclick="excluirAgendamento(${item.id})">
-                        Excluir
-                    </button>
+                        <button class="feito"
+                            onclick="abrirAvaliacao(${item.id})">
+                            Já atendido
+                        </button>
+                    ` : ""}
+
+                    ${
+                        item.status === "recusado" ||
+                        item.status === "cancelado" ||
+                        item.status === "feito"
+                        ? `
+                            <button class="excluir"
+                                onclick="excluirAgendamento(${item.id})">
+                                Excluir
+                            </button>
+                        `
+                        : ""
+                    }
 
                 </div>
 
@@ -144,9 +197,15 @@ async function carregarAgendamentos(){
 
 async function alterarStatus(id, status){
 
+    const dadosUpdate = { status };
+
+    if(status === "confirmado" || status === "feito"){
+        dadosUpdate.motivo = null;
+    }
+
     const { error } = await supabaseClient
         .from("agendamentos")
-        .update({ status })
+        .update(dadosUpdate)
         .eq("id", id);
 
     if(error){
@@ -160,7 +219,7 @@ async function alterarStatus(id, status){
 }
 
 
-// FILTROS
+// FILTROS NORMAIS
 
 botoesFiltro.forEach(botao => {
 
@@ -168,6 +227,10 @@ botoesFiltro.forEach(botao => {
 
         botoesFiltro.forEach(btn => btn.classList.remove("ativo"));
         botao.classList.add("ativo");
+
+        if(btnAvaliacoes){
+            btnAvaliacoes.classList.remove("ativo");
+        }
 
         const texto = botao.innerText.toLowerCase().trim();
 
@@ -183,6 +246,10 @@ botoesFiltro.forEach(botao => {
             filtroAtual = "confirmados";
         }
 
+        if(texto === "recusados"){
+            filtroAtual = "recusados";
+        }
+
         if(texto === "cancelados"){
             filtroAtual = "cancelados";
         }
@@ -196,6 +263,22 @@ botoesFiltro.forEach(botao => {
     });
 
 });
+
+
+// FILTRO AVALIAÇÕES
+
+if(btnAvaliacoes){
+    btnAvaliacoes.addEventListener("click", () => {
+
+        botoesFiltro.forEach(btn => btn.classList.remove("ativo"));
+        btnAvaliacoes.classList.add("ativo");
+
+        filtroAtual = "avaliacoes";
+
+        carregarAgendamentos();
+
+    });
+}
 
 
 // SAIR
@@ -333,11 +416,12 @@ Qualquer dúvida, pode falar por aqui.`;
 }
 
 
-// RECUSAR COM MOTIVO
+// RECUSAR PENDENTE
 
-async function cancelarAgendamento(id, nome, whatsapp, dia, hora){
+function recusarAgendamento(id, nome, whatsapp, dia, hora){
 
-    dadosRecusa = {
+    dadosAcao = {
+        tipo: "recusar",
         id,
         nome,
         whatsapp,
@@ -345,12 +429,28 @@ async function cancelarAgendamento(id, nome, whatsapp, dia, hora){
         hora
     };
 
-    document
-        .getElementById("motivo-overlay")
-        .classList
-        .add("ativo");
-
+    document.getElementById("motivo-overlay").classList.add("ativo");
 }
+
+
+// CANCELAR CONFIRMADO
+
+function cancelarConfirmado(id, nome, whatsapp, dia, hora){
+
+    dadosAcao = {
+        tipo: "cancelar",
+        id,
+        nome,
+        whatsapp,
+        dia,
+        hora
+    };
+
+    document.getElementById("motivo-overlay").classList.add("ativo");
+}
+
+
+// MODAL MOTIVO
 
 document
 .getElementById("motivo-cancelar")
@@ -364,48 +464,53 @@ document
 .getElementById("motivo-enviar")
 .addEventListener("click", async () => {
 
-    const motivo =
-    document.getElementById("motivo-texto")
-    .value
-    .trim();
+    const motivo = document.getElementById("motivo-texto").value.trim();
 
     if(!motivo){
-        abrirAviso("Digite o motivo da recusa.");
+        abrirAviso("Digite o motivo.");
         return;
     }
 
-    if(!dadosRecusa){
-        abrirAviso("Erro ao carregar dados da recusa.");
+    if(!dadosAcao){
+        abrirAviso("Erro ao carregar os dados.");
         return;
     }
 
-    const {
-        id,
-        nome,
-        whatsapp,
-        dia,
-        hora
-    } = dadosRecusa;
+    const { tipo, id, nome, whatsapp, dia, hora } = dadosAcao;
 
-    const atualizado = await alterarStatus(id, "cancelado");
+    const novoStatus = tipo === "recusar" ? "recusado" : "cancelado";
 
-    if(!atualizado){
+    const { error } = await supabaseClient
+        .from("agendamentos")
+        .update({
+            status: novoStatus,
+            motivo: motivo
+        })
+        .eq("id", id);
+
+    if(error){
+        abrirAviso("Erro ao salvar motivo.");
+        console.log(error);
         return;
     }
 
     const numero = limparNumero(whatsapp);
 
+    const textoAcao = tipo === "recusar" ? "recusado" : "cancelado";
+    const textoFinal = tipo === "recusar" ? "remarcar" : "reagendar";
+
     const mensagem =
 `Olá, ${nome}.
 
-Seu agendamento para ${dia} às ${hora} foi recusado/cancelado.
+Seu agendamento para ${dia} às ${hora} foi ${textoAcao}.
 
 Motivo:
 ${motivo}
 
-Caso queira remarcar, pode entrar em contato novamente.`;
+Caso queira ${textoFinal}, pode entrar em contato novamente.`;
 
     fecharModalMotivo();
+    carregarAgendamentos();
     abrirWhatsApp(numero, mensagem);
 
 });
@@ -421,8 +526,71 @@ function fecharModalMotivo(){
         .getElementById("motivo-texto")
         .value = "";
 
-    dadosRecusa = null;
+    dadosAcao = null;
 
+}
+
+
+// MODAL AVALIAÇÃO
+
+function abrirAvaliacao(id){
+
+    agendamentoParaAvaliar = id;
+
+    notaCliente.value = "";
+    avaliacaoCliente.value = "";
+
+    modalAvaliacao.classList.add("ativo");
+
+}
+
+if(cancelarAvaliacao){
+    cancelarAvaliacao.addEventListener("click", () => {
+
+        modalAvaliacao.classList.remove("ativo");
+        agendamentoParaAvaliar = null;
+
+    });
+}
+
+if(salvarAvaliacao){
+    salvarAvaliacao.addEventListener("click", async () => {
+
+        const nota = notaCliente.value;
+        const avaliacao = avaliacaoCliente.value.trim();
+
+        if(!nota){
+            abrirAviso("Escolha uma nota.");
+            return;
+        }
+
+        if(!agendamentoParaAvaliar){
+            abrirAviso("Erro ao encontrar o agendamento.");
+            return;
+        }
+
+        const { error } = await supabaseClient
+            .from("agendamentos")
+            .update({
+                status: "feito",
+                motivo: null,
+                nota_cliente: Number(nota),
+                avaliacao_cliente: avaliacao
+            })
+            .eq("id", agendamentoParaAvaliar);
+
+        if(error){
+            console.log(error);
+            abrirAviso("Erro ao salvar avaliação.");
+            return;
+        }
+
+        modalAvaliacao.classList.remove("ativo");
+        agendamentoParaAvaliar = null;
+
+        carregarAgendamentos();
+
+    });
 }
 
 

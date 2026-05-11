@@ -50,58 +50,15 @@
       <section class="filtros">
             <button class="ativo">Pendentes</button>
             <button>confirmados</button>
-            <button>cancelados</button>
-            <button>feitos</button>
-            <button>todos</button>
+            <button>Feitos</button>
+            <button>Cancelados</button>
+            <button>Recusados</button>
+            <button>Todos</button>  
+            
         </section>
 
-        <section class="lista-agendamentos">
 
-            <div class="agendamento-card">
-                <div class="agendamento-topo">
-                    <span class="status pendente">Pendente</span>
-                    <span class="data">15/05/2026 • 16:00</span>
-                </div>
-
-                <h2>João Silva</h2>
-
-                <div class="info">
-                    <p><strong>WhatsApp:</strong> (82) 99999-9999</p>
-                    <p><strong>Local:</strong> Campo do CSA</p>
-                    <p><strong>Tipo:</strong> Jogo de futebol</p>
-                    <p><strong>Observação:</strong> Fotos durante o segundo tempo.</p>
-                </div>
-
-                <div class="acoes">
-                    <button class="confirmar">Confirmar</button>
-                    <button class="cancelar">Cancelar</button>
-                    <button class="feito">Feito</button>
-                </div>
-            </div>
-
-            <div class="agendamento-card">
-                <div class="agendamento-topo">
-                    <span class="status confirmado">Confirmado</span>
-                    <span class="data">18/05/2026 • 09:00</span>
-                </div>
-
-                <h2>Carlos Henrique</h2>
-
-                <div class="info">
-                    <p><strong>WhatsApp:</strong> (82) 98888-8888</p>
-                    <p><strong>Local:</strong> Arena Society</p>
-                    <p><strong>Tipo:</strong> Ensaio esportivo</p>
-                    <p><strong>Observação:</strong> Quer fotos individuais e em grupo.</p>
-                </div>
-
-                <div class="acoes">
-                    <button class="confirmar">Confirmar</button>
-                    <button class="cancelar">Cancelar</button>
-                    <button class="feito">Feito</button>
-                </div>
-            </div>
-
-        </section>
+      <section class="lista-agendamentos"></section>
 
     </main>
 
@@ -153,6 +110,31 @@
 
     </div>
 
+</div>
+
+
+<div class="modal-avaliacao" id="modalAvaliacao">
+    <div class="box-avaliacao">
+        <h2>Avaliar cliente</h2>
+
+        <label>Nota do cliente</label>
+        <select id="notaCliente">
+            <option value="">Selecione</option>
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="1">★☆☆☆☆</option>
+        </select>
+
+        <label>Comentário</label>
+        <textarea id="avaliacaoCliente" placeholder="Escreva sua avaliação..."></textarea>
+
+        <div class="acoes-avaliacao">
+            <button id="cancelarAvaliacao">Cancelar</button>
+            <button id="salvarAvaliacao">Salvar avaliação</button>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
