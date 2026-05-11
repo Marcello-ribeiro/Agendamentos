@@ -100,8 +100,8 @@ async function carregarAgendamentos(){
         const nome = escaparTexto(item.nome);
         const whatsapp = escaparTexto(item.whatsapp);
         const tipo = escaparTexto(item.tipo);
-        const dia = escaparTexto(item.dia);
-        const hora = escaparTexto(item.hora);
+        const dia = escaparTexto(formatarDia(item.dia));
+        const hora = escaparTexto(String(item.hora).slice(0,5));
         const local = escaparTexto(item.local || "");
         const obs = escaparTexto(item.obs || "");
         const motivo = escaparTexto(item.motivo || "");
@@ -110,15 +110,25 @@ async function carregarAgendamentos(){
         lista.innerHTML += `
             <div class="agendamento-card">
 
-                <div class="agendamento-topo">
-                    <span class="status ${item.status}">
-                        ${item.status}
-                    </span>
+               <div class="agendamento-topo">
 
-                    <span class="data">
-                        ${dia} • ${hora}
-                    </span>
-                </div>
+    <span class="status ${item.status}">
+        ${item.status}
+    </span>
+
+    <div class="bloco-data">
+
+        <span class="titulo-data">
+            DATA/HORA
+        </span>
+
+        <span class="data">
+            ${dia} • ${hora}
+        </span>
+
+    </div>
+
+</div>
 
                 <h2>${nome}</h2>
 
@@ -404,7 +414,7 @@ async function confirmarAgendamento(id, nome, whatsapp, dia, hora, local){
     const numero = limparNumero(whatsapp);
 
     const mensagem =
-`Olá, ${nome}! Seu agendamento com a LZZ SportShot foi confirmado.
+`Olá, ${nome}! Seu agendamento com a LzzSportShot foi confirmado.
 
 Data: ${dia}
 Horário: ${hora}
@@ -593,6 +603,25 @@ if(salvarAvaliacao){
     });
 }
 
+
+function formatarDia(data){
+
+    if(!data){
+        return "";
+    }
+
+    const partes = String(data).split("-");
+
+    if(partes.length === 3){
+        const ano = partes[0];
+        const mes = partes[1];
+        const dia = partes[2];
+
+        return `${dia}/${mes}`;
+    }
+
+    return data;
+}
 
 // SEGURANÇA SIMPLES PARA TEXTOS NO HTML
 

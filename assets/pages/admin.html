@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/adminstyle.css">
-    <link rel="shortcut icon" href="../midia/favicon.ico" type="image/x-icon">
-    <title>Painel Admin</title>
 
+    <link rel="stylesheet" href="../css/adminstyle.css">
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="shortcut icon" href="../midia/favicon.ico" type="image/x-icon">
+
+    <title>Painel Admin</title>
 </head>
+
 <body>
 
     <header class="admin-header">
@@ -24,7 +26,9 @@
 
         <section class="hero-admin">
             <p class="subtitulo">— PAINEL ADMINISTRATIVO —</p>
+
             <h1>Agendamentos <span>recebidos</span></h1>
+
             <p class="descricao">
                 Veja os horários marcados, confirme sessões e acompanhe os eventos.
             </p>
@@ -47,97 +51,85 @@
             </div>
         </section>
 
-      <section class="filtros">
+        <section class="filtros">
             <button class="ativo">Pendentes</button>
-            <button>confirmados</button>
+            <button>Confirmados</button>
             <button>Feitos</button>
             <button>Cancelados</button>
             <button>Recusados</button>
-            <button>Todos</button>  
-            
+            <button>Todos</button>
+
         </section>
 
-
-      <section class="lista-agendamentos"></section>
+        <section class="lista-agendamentos"></section>
 
     </main>
 
+    <!-- MODAL CONFIRMAÇÃO -->
     <div id="confirm-overlay" class="confirm-overlay">
+        <div class="confirm-box">
 
-    <div class="confirm-box">
+            <p id="confirm-msg"></p>
 
-        <p id="confirm-msg"></p>
-
-        <div class="confirm-botoes">
-
-            <button id="confirm-ok">
-                Confirmar
-            </button>
-
-            <button id="confirm-cancel">
-                Cancelar
-            </button>
+            <div class="confirm-botoes">
+                <button id="confirm-ok">Confirmar</button>
+                <button id="confirm-cancel">Cancelar</button>
+            </div>
 
         </div>
-
     </div>
 
-</div>
+    <!-- MODAL MOTIVO -->
+    <div id="motivo-overlay" class="motivo-overlay">
+        <div class="motivo-box">
 
+            <h3>Motivo da recusa/cancelamento</h3>
 
-<div id="motivo-overlay" class="motivo-overlay">
+            <textarea
+                id="motivo-texto"
+                placeholder="Digite o motivo para o cliente..."
+            ></textarea>
 
-    <div class="motivo-box">
-
-        <h3>Motivo da recusa</h3>
-
-        <textarea
-            id="motivo-texto"
-            placeholder="Digite o motivo para o cliente..."
-        ></textarea>
-
-        <div class="motivo-botoes">
-
-            <button id="motivo-cancelar">
-                Cancelar
-            </button>
-
-            <button id="motivo-enviar">
-                Continuar
-            </button>
+            <div class="motivo-botoes">
+                <button id="motivo-cancelar">Cancelar</button>
+                <button id="motivo-enviar">Continuar</button>
+            </div>
 
         </div>
-
     </div>
 
-</div>
+    <!-- MODAL AVALIAÇÃO -->
+    <div class="modal-avaliacao" id="modalAvaliacao">
+        <div class="box-avaliacao">
 
+            <h2>Avaliar cliente</h2>
 
-<div class="modal-avaliacao" id="modalAvaliacao">
-    <div class="box-avaliacao">
-        <h2>Avaliar cliente</h2>
+            <label for="notaCliente">Nota do cliente</label>
+            <select id="notaCliente">
+                <option value="">Selecione</option>
+                <option value="5">★★★★★</option>
+                <option value="4">★★★★☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="1">★☆☆☆☆</option>
+            </select>
 
-        <label>Nota do cliente</label>
-        <select id="notaCliente">
-            <option value="">Selecione</option>
-            <option value="5">★★★★★</option>
-            <option value="4">★★★★☆</option>
-            <option value="3">★★★☆☆</option>
-            <option value="2">★★☆☆☆</option>
-            <option value="1">★☆☆☆☆</option>
-        </select>
+            <label for="avaliacaoCliente">Comentário</label>
+            <textarea
+                id="avaliacaoCliente"
+                placeholder="Escreva sua avaliação..."
+            ></textarea>
 
-        <label>Comentário</label>
-        <textarea id="avaliacaoCliente" placeholder="Escreva sua avaliação..."></textarea>
+            <div class="acoes-avaliacao">
+                <button id="cancelarAvaliacao">Cancelar</button>
+                <button id="salvarAvaliacao">Salvar avaliação</button>
+            </div>
 
-        <div class="acoes-avaliacao">
-            <button id="cancelarAvaliacao">Cancelar</button>
-            <button id="salvarAvaliacao">Salvar avaliação</button>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="../js/admin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../js/admin.js"></script>
+
 </body>
 </html>

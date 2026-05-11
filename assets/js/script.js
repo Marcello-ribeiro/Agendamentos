@@ -93,9 +93,28 @@ formAgenda.addEventListener("submit", async (e) => {
         return;
     }
 
-    mostrarToast("Agendamento enviado com sucesso! Aguarde nosso contato para confirmar todos os detalhes. Obrigado!📸👊");
+    const nomeCliente = document.getElementById("nome").value;
+
+mostrarToast(
+    `ola, ${nomeCliente}! seu agendamento foi enviado com sucesso! Aguarde nosso contato para confirmar todos os detalhes. Obrigado!📸👊`
+);
 
     formAgenda.reset();
+
+});
+
+
+const inputDia = document.getElementById("dia");
+
+inputDia.addEventListener("input", () => {
+
+    let valor = inputDia.value.replace(/\D/g, "");
+
+    if(valor.length > 2){
+        valor = valor.slice(0,2) + "/" + valor.slice(2,4);
+    }
+
+    inputDia.value = valor;
 
 });
 
