@@ -163,6 +163,25 @@
 </div>
     </section>
 
+    <section class="stats">
+
+    <div class="stat-card">
+        <h2>+1200</h2>
+        <p>Fotos entregues</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>+45</h2>
+        <p>Jogos cobertos</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>+220</h2>
+        <p>Clientes atendidos</p>
+    </div>
+
+</section>
+
 <section class="agendamento" id="agendamento">
 
     <form class="form-agendamento" id="formAgenda">
@@ -308,7 +327,41 @@
 <a href="assets/pages/login.html" class="admin-acesso">
     ㄥ乙乙
 </a>
+</footer>
 
+
+
+<div class="chatbot-btn" id="chatbotBtn"><img src="assets/midia/bate-papo.png"></div>
+
+<div class="chatbot-box" id="chatbotBox">
+    <div class="chatbot-header">
+        <div>
+            <strong>Atendente Virtual</strong>
+            <span>LZZ SportShot</span>
+            <div class="chat-status">
+    <span class="online-status">
+      <span class="bolinha-online"></span>  Online agora
+    </span>
+
+</div>
+        </div>
+        <button id="fecharChat">×</button>
+    </div>
+
+    <div class="chatbot-mensagens" id="chatbotMensagens">
+        <div class="msg bot">
+            Opa! Sou o assistente virtual da LZZ SportShot 📸<br>
+            Como posso te ajudar?
+        </div>
+
+        <div class="chatbot-opcoes">
+            <button onclick="iniciarAgendamentoChat()">Agendamento 📋</button>
+            <button onclick="responderBot('valores')">Valores 💰</button>
+            <button onclick="responderBot('horarios')">Horários 🕔</button>
+            <button onclick="responderBot('whatsapp')">Falar no WhatsApp 📲</button>
+        </div>
+    </div>
+</div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
