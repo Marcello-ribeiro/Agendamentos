@@ -474,12 +474,17 @@ document
 .getElementById("motivo-enviar")
 .addEventListener("click", async () => {
 
-    const motivo = document.getElementById("motivo-texto").value.trim();
+   const motivo = document.getElementById("motivo-texto").value.trim();
+const semMotivo = document.getElementById("semMotivo").checked;
 
-    if(!motivo){
-        abrirAviso("Digite o motivo.");
-        return;
-    }
+if(!motivo && !semMotivo){
+    abrirAviso("Digite o motivo ou marque a opção de não informar.");
+    return;
+}
+
+const motivoFinal = semMotivo
+    ? "Motivo não informado."
+    : motivo;
 
     if(!dadosAcao){
         abrirAviso("Erro ao carregar os dados.");
@@ -494,7 +499,7 @@ document
         .from("agendamentos")
         .update({
             status: novoStatus,
-            motivo: motivo
+            motivo: motivoFinal
         })
         .eq("id", id);
 
@@ -509,19 +514,24 @@ document
     const textoAcao = tipo === "recusar" ? "recusado" : "cancelado";
     const textoFinal = tipo === "recusar" ? "remarcar" : "reagendar";
 
+fecharModalMotivo();
+carregarAgendamentos();
+
+if(!semMotivo){
+
     const mensagem =
 `Olá, ${nome}.
 
 Seu agendamento para ${dia} às ${hora} foi ${textoAcao}.
 
 Motivo:
-${motivo}
+${motivoFinal}
 
 Caso queira ${textoFinal}, pode entrar em contato novamente.`;
 
-    fecharModalMotivo();
-    carregarAgendamentos();
     abrirWhatsApp(numero, mensagem);
+
+}
 
 });
 
@@ -536,7 +546,11 @@ function fecharModalMotivo(){
         .getElementById("motivo-texto")
         .value = "";
 
+        document.getElementById("semMotivo").checked = false;
+
     dadosAcao = null;
+
+    
 
 }
 

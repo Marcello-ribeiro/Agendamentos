@@ -79,24 +79,31 @@
         </div>
     </div>
 
-    <!-- MODAL MOTIVO -->
-    <div id="motivo-overlay" class="motivo-overlay">
-        <div class="motivo-box">
+   <!-- MODAL MOTIVO -->
+<div id="motivo-overlay" class="motivo-overlay">
+    <div class="motivo-box">
 
-            <h3>Motivo da recusa/cancelamento</h3>
+        <h3>Motivo da recusa/cancelamento</h3>
 
-            <textarea
-                id="motivo-texto"
-                placeholder="Digite o motivo para o cliente..."
-            ></textarea>
+        <textarea
+            id="motivo-texto"
+            placeholder="Digite o motivo para o cliente..."
+        ></textarea>
 
-            <div class="motivo-botoes">
-                <button id="motivo-cancelar">Cancelar</button>
-                <button id="motivo-enviar">Continuar</button>
-            </div>
-
+        <div class="sem-motivo-box">
+            <input type="checkbox" id="semMotivo">
+            <label for="semMotivo">
+                Não informar motivo
+            </label>
         </div>
+
+        <div class="motivo-botoes">
+            <button id="motivo-cancelar">Cancelar</button>
+            <button id="motivo-enviar">Continuar</button>
+        </div>
+
     </div>
+</div>
 
     <!-- MODAL AVALIAÇÃO -->
     <div class="modal-avaliacao" id="modalAvaliacao">

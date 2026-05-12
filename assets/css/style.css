@@ -119,7 +119,7 @@ color: white;
 }
 
 .botoes{
-    padding-top: 40px;
+    padding-top: 20px;
     display: flex;
     gap: 30px;
 }
@@ -139,19 +139,21 @@ color: white;
     background: rgb(68, 103, 216);
 }
 
-.zap{
+.Banlek{
     
-    padding: 10px;
+    padding: 15px;
     color: lightgray;
     background: #ffffff00;
     border-style: none;
     border-radius: 18px;
     cursor: pointer;
     transition: color 0.5s;
+    transition: background-color 0.7s;
 }
 
-.zap:hover{
+.Banlek:hover{
     color: rgb(80, 112, 216);
+    background-color:rgba(68, 103, 216, 0.301);;
 }
 
 .trabalhos{
@@ -746,6 +748,14 @@ section p{
         font-size: 34px;
     }
 
+}
+
+@media (max-width: 768px) {
+    input,
+    textarea,
+    select {
+        font-size: 16px;
+    }
 }
 
 
