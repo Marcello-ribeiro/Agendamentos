@@ -187,7 +187,7 @@ nav{
     align-items: center;
 }
 
-.chatbot-header span{
+.chatbot-header > div > span{
     display: block;
     font-size: 12px;
     opacity: .8;
@@ -209,6 +209,7 @@ nav{
 }
 
 .msg{
+    text-align: center;
     padding: 11px 13px;
     border-radius: 14px;
     margin-bottom: 30px;
@@ -1299,29 +1300,40 @@ section p{
     gap: 2px;
 }
 
+.chat-status{
+    margin-top: 4px;
+}
+
+.chatbot-header > div:first-child{
+    min-width: 0;
+}
+
+.chat-status{
+    margin-top: 5px;
+}
+
 .online-status{
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
 
     font-size: 12px;
-    color: rgba(255,255,255,.9);
+    line-height: 1;
+
+    white-space: nowrap;
 }
 
 .bolinha-online{
+    display: inline-block;
+
     width: 8px;
     height: 8px;
+    min-width: 8px;
 
     border-radius: 50%;
 
     background: #00ff66;
-
-    box-shadow: 0 0 10px #00ff66;
-}
-
-.chat-status small{
-    color: rgba(255,255,255,.6);
-    font-size: 11px;
+    box-shadow: 0 0 8px #00ff66;
 }
 
 .chatbot-opcoes button:active{
