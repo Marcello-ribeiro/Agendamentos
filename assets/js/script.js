@@ -329,6 +329,15 @@ async function enviarRespostaChat(){
 
     const resposta = input.value.trim();
 
+    if(camposChat[etapaChat] === "hora"){
+    const horaValida = /^([01]\d|2[0-3]):[0-5]\d$/.test(resposta);
+
+    if(!horaValida){
+        adicionarMensagem("Digite um horário válido. Exemplo: 16:30", "bot");
+        return;
+    }
+}
+
     if(resposta === ""){
         return;
     }
