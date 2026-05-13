@@ -661,7 +661,7 @@ async function salvarAgendamentoChat(){
         <strong>Horário:</strong> ${dadosChat.hora}<br>
         <strong>Local:</strong> ${dadosChat.local}<br><br>
 
-        Agora é só aguardar a confirmação da LZZ SportShot 📸
+        Agora é só aguardar a confirmação da LzzSportShot 📸
     `, "bot");
 
     adicionarBotaoVoltar();
