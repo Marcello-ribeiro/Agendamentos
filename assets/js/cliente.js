@@ -461,3 +461,28 @@ function formatarHora(hora){
 
 
 verificarLogin();
+
+supabaseClient
+.channel("chat-cliente-tempo-real")
+
+.on(
+    "postgres_changes",
+    {
+        event: "INSERT",
+        schema: "public",
+        table: "mensagens_agendamento"
+    },
+
+    payload => {
+
+        if(
+            chatAgendamentoAtual &&
+            payload.new.agendamento_id === chatAgendamentoAtual
+        ){
+            carregarMensagensChat();
+        }
+
+    }
+)
+
+.subscribe();

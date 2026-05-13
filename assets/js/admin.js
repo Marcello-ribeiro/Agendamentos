@@ -798,3 +798,28 @@ if(fecharChatAdmin){
 
 verificarLogin();
 carregarAgendamentos();
+
+supabaseClient
+.channel("chat-admin-tempo-real")
+
+.on(
+    "postgres_changes",
+    {
+        event: "INSERT",
+        schema: "public",
+        table: "mensagens_agendamento"
+    },
+
+    payload => {
+
+        if(
+            chatAdminAgendamentoId &&
+            payload.new.agendamento_id === chatAdminAgendamentoId
+        ){
+            carregarChatAdmin();
+        }
+
+    }
+)
+
+.subscribe();
