@@ -300,18 +300,7 @@ li{
 }
 
 /* BOTÃO */
-.agendar-nv{
-    padding: 8px 16px;
-    border: none;
-    background:rgb(115, 115, 235);
-    color: black;
-    border-radius: 15px;
-    cursor: pointer;
-}
-.agendar-nv a{
-text-decoration: none;
-color: white;
-} 
+ 
 
 .font-autor{
     font-family: 'Montserrat', sans-serif;
@@ -1009,11 +998,6 @@ section p{
         gap: 22px;
         font-size: 13px;
     }
-
-    .agendar-nv{
-        padding: 7px 14px;
-        font-size: 10px;
-    }
     header{
         text-align: center;
     }
@@ -1485,6 +1469,79 @@ section p{
 }
 
 
+.login-opcional{
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    background: rgba(0,0,0,.78);
+    backdrop-filter: blur(10px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.login-opcional.sumir{
+    display: none;
+}
+
+.login-opcional-box{
+    width: 100%;
+    max-width: 420px;
+
+    background: linear-gradient(180deg, rgb(20,20,45), rgb(8,8,18));
+
+    border: 1px solid rgba(138,138,245,.35);
+    border-radius: 24px;
+
+    padding: 28px;
+
+    text-align: center;
+
+    box-shadow: 0 0 40px rgba(0,0,0,.55);
+}
+
+.login-opcional-box h2{
+    color: rgb(138,138,245);
+    margin-bottom: 14px;
+}
+
+.login-opcional-box p{
+    color: rgba(255,255,255,.75);
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.btn-login-opcional,
+.btn-sem-login{
+    width: 100%;
+    display: block;
+
+    padding: 14px 18px;
+    border-radius: 14px;
+
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn-login-opcional{
+    background: rgb(138,138,245);
+    color: black;
+    text-decoration: none;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.btn-sem-login{
+    background: transparent;
+    color: rgb(138,138,245);
+
+    border: 1px solid rgba(138,138,245,.35);
+}
+
 .agenda-publica{
     padding: 70px 20px;
     text-align: center;
@@ -1560,6 +1617,78 @@ section p{
     font-weight: 700;
 
     margin-bottom: 18px;
+}
+
+.painel-cliente{
+    min-height: 100vh;
+
+    background-image: linear-gradient(to top, rgb(29,29,65), black);
+
+    padding: 40px 20px;
+}
+
+.cliente-topo{
+    max-width: 1100px;
+
+    margin: 0 auto 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cliente-topo h1{
+    color: rgb(138,138,245);
+}
+
+#logout{
+    padding: 12px 18px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(138,138,245,.35);
+
+    background: rgba(255,255,255,.04);
+
+    color: rgb(138,138,245);
+
+    cursor: pointer;
+}
+
+.lista-cliente{
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+
+    gap: 22px;
+}
+
+.mensagem-admin{
+    margin-top: 18px;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    background: rgba(138,138,245,.08);
+
+    border: 1px solid rgba(138,138,245,.15);
+}
+
+.cliente-logado{
+    margin-top: 8px;
+
+    color: rgba(255,255,255,.65);
+
+    font-size: 14px;
+}
+
+#nomeCliente{
+    color: rgb(138,138,245);
+    font-weight: 700;
 }
 
 .status-publico.confirmado{
@@ -1660,4 +1789,893 @@ section p{
         font-size: 1.6rem;
     }
 
+}
+
+.nav-botoes{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cliente-nv{
+    margin-top: 2px;
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid rgba(138,138,245,.3);
+
+    background: rgba(255,255,255,.03);
+
+    transition: .25s;
+}
+
+.cliente-nv:hover{
+    transform: translateY(-2px);
+
+    border-color: rgba(138,138,245,.7);
+
+    box-shadow: 0 0 18px rgba(138,138,245,.25);
+}
+
+.cliente-nv a{
+    text-decoration: none;
+    color: rgb(138,138,245);
+}
+
+.acoes-cliente{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#voltarSite,
+#logout{
+    padding: 12px 18px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(138,138,245,.35);
+
+    background: rgba(255,255,255,.04);
+
+    color: rgb(138,138,245);
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+#voltarSite:hover,
+#logout:hover{
+    transform: translateY(-2px);
+
+    border-color: rgba(138,138,245,.7);
+
+    box-shadow: 0 0 18px rgba(138,138,245,.18);
+}
+
+.lista-cliente .agendamento-card{
+    background: rgba(255,255,255,.04);
+
+    border: 1px solid rgba(138,138,245,.22);
+
+    border-radius: 22px;
+
+    padding: 22px;
+
+    min-height: 230px;
+
+    text-align: left;
+
+    box-shadow: 0 0 28px rgba(0,0,0,.25);
+}
+
+.lista-cliente .agendamento-topo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+.lista-cliente .status{
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.lista-cliente .status.pendente{
+    background: rgba(255, 193, 7, .12);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, .25);
+}
+
+.lista-cliente .status.confirmado{
+    background: rgba(0, 255, 140, .12);
+    color: #00ff8c;
+    border: 1px solid rgba(0, 255, 140, .25);
+}
+
+.lista-cliente .status.cancelado,
+.lista-cliente .status.recusado{
+    background: rgba(255, 70, 70, .12);
+    color: #ff7070;
+    border: 1px solid rgba(255, 70, 70, .25);
+}
+
+.lista-cliente .data{
+    color: rgba(255,255,255,.55);
+    font-size: 13px;
+}
+
+.lista-cliente .agendamento-card h2{
+    color: rgb(138,138,245);
+
+    font-size: 26px;
+
+    margin-bottom: 18px;
+}
+
+.lista-cliente .info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    color: rgba(255,255,255,.78);
+}
+
+.lista-cliente .info p{
+    margin: 0;
+}
+
+.lista-cliente .info strong{
+    color: rgba(255,255,255,.9);
+}
+
+@media(max-width: 600px){
+    .lista-cliente .agendamento-topo{
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+.cliente-card{
+    text-align: left;
+}
+
+.cliente-card-corpo{
+    margin-top: 18px;
+}
+
+.cliente-card h2{
+    text-align: left;
+    margin-bottom: 22px;
+}
+
+.cliente-info-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 24px;
+}
+
+.cliente-info-grid p{
+    padding: 12px 14px;
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(138,138,245,.12);
+}
+
+.cliente-info-grid .full{
+    grid-column: 1 / -1;
+}
+
+.cliente-info-grid strong{
+    display: block;
+    margin-bottom: 5px;
+
+    color: rgb(138,138,245);
+    font-size: 13px;
+}
+
+.cliente-info-grid span{
+    color: rgba(255,255,255,.82);
+}
+
+@media(max-width: 700px){
+    .cliente-info-grid{
+        grid-template-columns: 1fr;
+    }
+}
+
+.cliente-card{
+    padding: 18px;
+    min-height: auto;
+}
+
+.cliente-card h2{
+    font-size: 20px;
+    margin: 18px 0;
+}
+
+.data-cliente{
+    margin-top: 10px;
+
+    color: rgba(255,255,255,.58);
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.titulo-local{
+    font-size: 24px;
+    font-weight: 700;
+
+    color: rgb(138,138,245);
+
+    margin: 22px 0 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cliente-info-compacta{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.cliente-info-compacta p{
+    margin: 0;
+    padding: 12px;
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(138,138,245,.13);
+
+    font-size: 14px;
+}
+
+.cliente-info-compacta strong{
+    color: rgb(138,138,245);
+}
+
+.btn-cancelar-cliente{
+    padding: 9px 13px;
+
+    border-radius: 12px;
+    border: 1px solid rgba(255,80,80,.35);
+
+    background: rgba(255,80,80,.08);
+    color: #ff7777;
+
+    cursor: pointer;
+}
+
+.btn-cancelar-cliente:disabled{
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.aviso-cancelamento{
+    margin-top: 14px;
+    color: #ffb84d;
+    font-size: 13px;
+}
+
+.motivo-cancelamento{
+    margin-top: 14px;
+
+    padding: 14px 16px;
+
+    border-radius: 12px;
+
+    background: rgba(255,80,80,.07);
+    border: 1px solid rgba(255,80,80,.18);
+
+    min-height: auto;
+}
+
+.cliente-nv img{
+    width: 16px;
+    height: 16px;
+    background-color: wheat;
+}
+
+.motivo-cancelamento strong{
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: rgb(138,138,245);
+}
+
+.motivo-cancelamento p{
+    margin: 0;
+
+    line-height: 1.4;
+
+    color: white;
+}
+
+
+
+@media(max-width: 600px){
+
+    .painel-cliente{
+        padding: 28px 16px;
+    }
+
+    .cliente-topo{
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .cliente-topo h1{
+        font-size: 30px;
+        line-height: 1.1;
+    }
+
+    .acoes-cliente{
+        gap: 8px;
+    }
+
+    #voltarSite,
+    #logout{
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .lista-cliente{
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .cliente-info-compacta{
+        grid-template-columns: 1fr;
+    }
+
+    .cliente-info-compacta p{
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .cliente-card h2{
+        font-size: 18px;
+    }
+}
+
+
+.lista-cliente .cliente-card .titulo-local{
+    width: fit-content;
+
+    margin: 34px 0 20px;
+
+    padding: 10px 14px;
+
+    border-radius: 14px;
+
+    background: rgba(138,138,245,.08);
+
+    border: 1px solid rgba(138,138,245,.18);
+
+    color: rgb(138,138,245);
+
+    font-size: 20px;
+    font-weight: 800;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    text-align: left;
+}
+
+.lista-cliente .cliente-card .titulo-local span{
+    font-size: 17px;
+}
+
+.modal-cancelamento-cliente{
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0,0,0,.78);
+    backdrop-filter: blur(8px);
+}
+
+.modal-cancelamento-cliente.ativo{
+    display: flex;
+}
+
+.modal-cancelamento-box{
+    width: 100%;
+    max-width: 430px;
+
+    padding: 26px;
+
+    border-radius: 22px;
+
+    background: rgba(15,15,35,.96);
+    border: 1px solid rgba(138,138,245,.28);
+
+    box-shadow: 0 0 35px rgba(0,0,0,.5);
+}
+
+.modal-cancelamento-box h2{
+    color: rgb(138,138,245);
+    margin-bottom: 12px;
+}
+
+.modal-cancelamento-box p{
+    color: rgba(255,255,255,.7);
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+#motivoCancelamentoCliente{
+    width: 100%;
+    min-height: 120px;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(138,138,245,.25);
+
+    color: white;
+
+    resize: none;
+    outline: none;
+}
+
+#motivoCancelamentoCliente:focus{
+    border-color: rgba(138,138,245,.7);
+}
+
+.modal-cancelamento-acoes{
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.modal-cancelamento-acoes button{
+    flex: 1;
+
+    padding: 13px;
+
+    border-radius: 13px;
+
+    cursor: pointer;
+}
+
+#fecharCancelamentoCliente{
+    background: transparent;
+    color: rgb(138,138,245);
+    border: 1px solid rgba(138,138,245,.3);
+}
+
+#confirmarCancelamentoCliente{
+    background: rgba(255,70,70,.12);
+    color: #ff7777;
+    border: 1px solid rgba(255,70,70,.35);
+}
+
+.cancelado-por-cliente{
+    margin-top: 14px;
+
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    width: fit-content;
+
+    background: rgba(255,70,70,.08);
+
+    border: 1px solid rgba(255,70,70,.18);
+
+    color: #ff8a8a;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.cliente-area-box{
+    position: relative;
+
+    display: inline-flex;
+}
+
+.notificacao-cliente{
+    position: absolute;
+
+    top: -8px;
+    right: -8px;
+
+    min-width: 22px;
+    height: 22px;
+
+    padding: 0 6px;
+
+    border-radius: 999px;
+
+    background: #ff3b3b;
+
+    color: white;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+    0 0 12px rgba(255,59,59,.45);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .25s;
+}
+
+.notificacao-cliente.ativo{
+    opacity: 1;
+}
+
+.chat-cliente-box{
+    margin-top: 16px;
+
+    padding: 14px;
+
+    border-radius: 16px;
+
+    background: rgba(255,255,255,.03);
+
+    border: 1px solid rgba(138,138,245,.10);
+}
+
+.chat-cliente-box h3{
+    color: rgb(138,138,245);
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+}
+
+.mensagens-cliente{
+    max-height: 120px;
+
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 10px;
+}
+
+.msg-cliente{
+    display: inline-block;
+
+    width: auto;
+
+    max-width: 80%;
+
+    padding: 8px 12px;
+
+    border-radius: 12px;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+
+    word-break: break-word;
+}
+
+.msg-cliente span{
+    display: none;
+}
+
+.msg-cliente.admin{
+    align-self: flex-start;
+
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid rgba(255,255,255,.06);
+}
+
+.msg-cliente.cliente{
+    align-self: flex-end;
+
+    background: rgba(138,138,245,.16);
+
+    border: 1px solid rgba(138,138,245,.16);
+}
+
+.enviar-msg-cliente{
+    display: flex;
+
+    gap: 8px;
+}
+
+.enviar-msg-cliente input{
+    flex: 1;
+
+    height: 42px;
+
+    padding: 0 14px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(138,138,245,.15);
+
+    background: rgba(0,0,0,.25);
+
+    color: white;
+
+    outline: none;
+
+    font-size: 13px;
+}
+
+.enviar-msg-cliente button{
+    height: 42px;
+
+    padding: 0 16px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    background: rgb(138,138,245);
+
+    color: black;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+.btn-chat-suporte{
+    height: 42px;
+
+    padding: 0 18px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    background: rgb(138,138,245);
+
+    color: black;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.overlay-chat{
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(8px);
+
+    padding: 20px;
+}
+
+.overlay-chat.ativo{
+    display: flex;
+}
+
+.modal-chat{
+    width: 100%;
+    max-width: 520px;
+    height: 75vh;
+
+    background: rgb(15,15,35);
+
+    border: 1px solid rgba(138,138,245,.25);
+    border-radius: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.topo-chat{
+    padding: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.topo-chat h2{
+    color: rgb(138,138,245);
+    font-size: 20px;
+}
+
+#fecharChatCliente{
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.mensagens-chat-cliente{
+    flex: 1;
+
+    padding: 18px;
+
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.enviar-chat-cliente{
+    padding: 16px;
+
+    display: flex;
+    gap: 10px;
+
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.enviar-chat-cliente input{
+    flex: 1;
+
+    height: 46px;
+
+    border-radius: 14px;
+
+    border: 1px solid rgba(138,138,245,.2);
+
+    background: rgba(0,0,0,.28);
+
+    color: white;
+
+    padding: 0 14px;
+
+    outline: none;
+}
+
+.enviar-chat-cliente button{
+    height: 46px;
+
+    padding: 0 18px;
+
+    border-radius: 14px;
+
+    border: none;
+
+    background: rgb(138,138,245);
+
+    color: black;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.msg-cliente{
+    width: fit-content;
+    max-width: 78%;
+
+    padding: 10px 13px;
+
+    border-radius: 16px;
+
+    color: white;
+
+    line-height: 1.4;
+}
+
+.msg-cliente span{
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    opacity: .7;
+}
+
+.msg-cliente p{
+    margin: 0;
+}
+
+.msg-cliente.admin{
+    align-self: flex-start;
+
+    border-bottom-left-radius: 4px;
+
+    background: rgba(255,255,255,.08);
+
+    border: 1px solid rgba(255,255,255,.08);
+}
+
+.msg-cliente.cliente{
+    align-self: flex-end;
+
+    border-bottom-right-radius: 4px;
+
+    background: rgba(138,138,245,.22);
+
+    border: 1px solid rgba(138,138,245,.28);
+}
+
+.msg-cliente.admin span{
+    color: #ffffff;
+}
+
+.msg-cliente.cliente span{
+    color: rgb(170,170,255);
+}
+
+@media(max-width: 600px){
+
+    .cliente-topo{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .cliente-topo h1{
+        font-size: 32px;
+        line-height: 1.05;
+    }
+
+    .cliente-logado{
+        font-size: 13px;
+        margin-top: 8px;
+    }
+
+    .acoes-cliente{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .acoes-cliente button,
+    .btn-chat-suporte,
+    #voltarSite,
+    #logout{
+        width: 100%;
+        height: 44px;
+        padding: 0 14px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
 }

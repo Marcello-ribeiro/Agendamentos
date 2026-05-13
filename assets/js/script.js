@@ -94,20 +94,27 @@ if(formAgenda){
         const local = document.getElementById("local").value.trim();
         const obs = document.getElementById("obs").value.trim();
 
-        const { error } = await supabaseClient
-            .from("agendamentos")
-            .insert([
-                {
-                    nome,
-                    whatsapp,
-                    tipo,
-                    dia,
-                    hora,
-                    local,
-                    obs,
-                    status: "pendente"
-                }
-            ]);
+      const { data: sessionData } = await supabaseClient.auth.getSession();
+
+const userId = sessionData.session
+    ? sessionData.session.user.id
+    : null;
+
+const { error } = await supabaseClient
+    .from("agendamentos")
+    .insert([
+        {
+            nome,
+            whatsapp,
+            tipo,
+            dia,
+            hora,
+            local,
+            obs,
+            status: "pendente",
+            user_id: userId
+        }
+    ]);
 
         if(error){
             mostrarToast("Erro ao enviar agendamento, tente novamente.");
@@ -624,18 +631,25 @@ async function salvarAgendamentoChat(){
 
     adicionarMensagem("Enviando seu agendamento...", "bot");
 
-    const { error } = await supabaseClient
-        .from("agendamentos")
-        .insert([{
-            nome: dadosChat.nome,
-            whatsapp: dadosChat.whatsapp,
-            tipo: dadosChat.tipo,
-            dia: dadosChat.dia,
-            hora: dadosChat.hora,
-            local: dadosChat.local,
-            obs: dadosChat.obs.toLowerCase() === "não" ? "" : dadosChat.obs,
-            status: "pendente"
-        }]);
+const { data: sessionData } = await supabaseClient.auth.getSession();
+
+const userId = sessionData.session
+    ? sessionData.session.user.id
+    : null;
+
+const { error } = await supabaseClient
+    .from("agendamentos")
+    .insert([{
+        nome: dadosChat.nome,
+        whatsapp: dadosChat.whatsapp,
+        tipo: dadosChat.tipo,
+        dia: dadosChat.dia,
+        hora: dadosChat.hora,
+        local: dadosChat.local,
+        obs: dadosChat.obs.toLowerCase() === "não" ? "" : dadosChat.obs,
+        status: "pendente",
+        user_id: userId
+    }]);
 
     if(error){
 
@@ -844,3 +858,97 @@ card.innerHTML = `
 }
 
 carregarHorariosPublicos();
+const loginOpcional = document.querySelector("#loginOpcional");
+const continuarSemLogin = document.querySelector("#continuarSemLogin");
+
+async function controlarTelaLoginOpcional(){
+
+    if(!loginOpcional || !continuarSemLogin){
+        return;
+    }
+
+    const { data } = await supabaseClient.auth.getSession();
+
+    const jaEscolheuSemLogin = localStorage.getItem("continuarSemLogin");
+
+    if(data.session || jaEscolheuSemLogin === "sim"){
+        loginOpcional.classList.add("sumir");
+        return;
+    }
+
+    loginOpcional.classList.remove("sumir");
+}
+
+if(continuarSemLogin){
+    continuarSemLogin.addEventListener("click", () => {
+        localStorage.setItem("continuarSemLogin", "sim");
+        loginOpcional.classList.add("sumir");
+    });
+}
+
+
+async function verificarMensagensCliente(){
+
+    const { data: sessionData } =
+    await supabaseClient.auth.getSession();
+
+    if(!sessionData.session){
+        return;
+    }
+
+    const userId =
+    sessionData.session.user.id;
+
+    const { data: agendamentos } =
+    await supabaseClient
+    .from("agendamentos")
+    .select("id")
+    .eq("user_id", userId);
+
+    if(!agendamentos){
+        return;
+    }
+
+    const ids =
+    agendamentos.map(item => item.id);
+
+    if(ids.length === 0){
+        return;
+    }
+
+    const { data: mensagens } =
+    await supabaseClient
+    .from("mensagens_agendamento")
+    .select("*")
+    .in("agendamento_id", ids)
+    .eq("remetente", "admin")
+    .eq("lida", false);
+
+    const badge =
+    document.querySelector("#notificacaoCliente");
+
+    if(!badge){
+        return;
+    }
+
+    const total =
+    mensagens?.length || 0;
+
+    badge.innerText = total;
+
+    if(total > 0){
+        badge.classList.add("ativo");
+    }else{
+        badge.classList.remove("ativo");
+    }
+
+}
+
+verificarMensagensCliente();
+
+setInterval(
+    verificarMensagensCliente,
+    5000
+);
+
+controlarTelaLoginOpcional();

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="../css/adminstyle.css">
-    <link rel="stylesheet" href="../css/admin.css">
     <link rel="shortcut icon" href="../midia/favicon.ico" type="image/x-icon">
 
     <title>Painel Admin</title>
@@ -134,6 +133,34 @@
 
         </div>
     </div>
+
+    <div class="overlay-chat" id="overlayChatAdmin">
+    <div class="modal-chat">
+
+        <div class="topo-chat">
+            <h2>Chat com o cliente</h2>
+
+            <button id="fecharChatAdmin">
+                ✕
+            </button>
+        </div>
+
+        <div class="mensagens-chat-admin" id="mensagensChatAdmin"></div>
+
+        <div class="enviar-chat-admin">
+            <input 
+                type="text"
+                id="inputChatAdmin"
+                placeholder="Digite sua mensagem..."
+            >
+
+            <button id="btnEnviarChatAdmin">
+                Enviar
+            </button>
+        </div>
+
+    </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="../js/admin.js"></script>

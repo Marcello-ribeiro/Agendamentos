@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Cliente</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<section class="painel-cliente">
+
+    <div class="cliente-topo">
+
+        <div>
+
+            <h1>Meus Agendamentos</h1>
+
+            <p class="cliente-logado">
+                Logado como:
+                <span id="nomeCliente"></span>
+            </p>
+
+        </div>
+
+        <div class="acoes-cliente">
+
+            <button 
+                id="abrirChatSuporte"
+                class="btn-chat-suporte"
+            >
+                Falar com a Marcello 💬
+            </button>
+
+            <button id="voltarSite">
+               ☚ Voltar ao site
+            </button>
+
+            <button id="logout">
+               ↮ Sair da conta
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="lista-cliente"></div>
+
+</section>
+
+
+<!-- MODAL CANCELAMENTO -->
+
+<div 
+    id="modalCancelamentoCliente"
+    class="modal-cancelamento-cliente"
+>
+
+    <div class="modal-cancelamento-box">
+
+        <h2>Cancelar agendamento</h2>
+
+        <p>
+            Informe o motivo do cancelamento.
+            O cancelamento só é permitido
+            com 24h de antecedência.
+        </p>
+
+        <textarea 
+            id="motivoCancelamentoCliente"
+            placeholder="Digite o motivo..."
+        ></textarea>
+
+        <div class="modal-cancelamento-acoes">
+
+            <button id="fecharCancelamentoCliente">
+                Voltar
+            </button>
+
+            <button id="confirmarCancelamentoCliente">
+                Confirmar cancelamento
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- CHAT -->
+
+<div class="overlay-chat" id="overlayChatCliente">
+
+    <div class="modal-chat">
+
+        <div class="topo-chat">
+
+            <h2>Chat com Marcello</h2>
+
+            <button id="fecharChatCliente">
+                ✕
+            </button>
+
+        </div>
+
+        <div 
+            class="mensagens-chat-cliente"
+            id="mensagensChatCliente"
+        >
+        </div>
+
+        <div class="enviar-chat-cliente">
+
+            <input 
+                type="text"
+                id="inputChatCliente"
+                placeholder="Digite sua mensagem..."
+            >
+
+            <button id="btnEnviarChatCliente">
+                Enviar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../js/cliente.js"></script>
+
+</body>
+</html>

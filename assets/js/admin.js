@@ -112,9 +112,17 @@ async function carregarAgendamentos(){
 
                <div class="agendamento-topo">
 
-    <span class="status ${item.status}">
-        ${item.status}
-    </span>
+   <span class="status ${item.status}">
+
+    ${
+        item.cancelado_por === "cliente"
+        ?
+        "cancelado pelo cliente"
+        :
+        item.status
+    }
+
+</span>
 
     <div class="bloco-data">
 
@@ -139,10 +147,19 @@ async function carregarAgendamentos(){
                     <p><strong>Obs:</strong> ${obs || "Nenhuma"}</p>
 
                     ${
-                        item.status === "recusado" || item.status === "cancelado"
-                        ? `<p><strong>Motivo:</strong> ${motivo || "Não informado"}</p>`
-                        : ""
-                    }
+    item.motivo_cancelamento &&
+    item.motivo_cancelamento !== "nullable" &&
+    item.motivo_cancelamento !== "null"
+    ?
+    `
+    <p>
+        <strong>Motivo:</strong>
+        ${item.motivo_cancelamento}
+    </p>
+    `
+    :
+    ""
+}
 
                     ${
                         item.status === "feito" && item.nota_cliente
@@ -195,10 +212,18 @@ async function carregarAgendamentos(){
                         : ""
                     }
 
+    <button 
+    class="btn-chat-admin"
+    onclick="abrirChatAdmin(${item.id}, '${item.user_id || ""}', '${nome}')"
+>
+    Abrir conversa
+</button>
+
                 </div>
 
             </div>
         `;
+
     });
 }
 
@@ -654,6 +679,120 @@ function escaparTexto(texto){
         .replaceAll(">", "&gt;");
 }
 
+
+
+const overlayChatAdmin = document.querySelector("#overlayChatAdmin");
+const fecharChatAdmin = document.querySelector("#fecharChatAdmin");
+const mensagensChatAdmin = document.querySelector("#mensagensChatAdmin");
+const inputChatAdmin = document.querySelector("#inputChatAdmin");
+const btnEnviarChatAdmin = document.querySelector("#btnEnviarChatAdmin");
+
+let chatAdminAgendamentoId = null;
+let chatAdminUserId = null;
+let nomeClienteAtual = "Cliente";
+
+function abrirChatAdmin(agendamentoId, userId, nome){
+
+    if(!userId){
+        abrirAviso("Esse cliente não fez login.");
+        return;
+    }
+
+    chatAdminAgendamentoId = agendamentoId;
+    chatAdminUserId = userId;
+
+    nomeClienteAtual = nome;
+
+    overlayChatAdmin.classList.add("ativo");
+
+    carregarChatAdmin();
+}
+
+async function carregarChatAdmin(){
+
+    const { data, error } = await supabaseClient
+        .from("mensagens_agendamento")
+        .select("*")
+        .eq("agendamento_id", chatAdminAgendamentoId)
+        .order("criado_em", { ascending: true });
+
+    if(error){
+        console.log(error);
+        mensagensChatAdmin.innerHTML = "<p>Erro ao carregar mensagens.</p>";
+        return;
+    }
+
+    mensagensChatAdmin.innerHTML = "";
+
+    if(!data || data.length === 0){
+        mensagensChatAdmin.innerHTML = "<p>Nenhuma mensagem ainda.</p>";
+        return;
+    }
+
+   data.forEach(msg => {
+    mensagensChatAdmin.innerHTML += `
+        <div class="msg-chat-admin ${msg.remetente}">
+            <span>
+                ${
+    msg.remetente === "admin"
+    ?
+    "Você"
+    :
+    nomeClienteAtual
+}
+            </span>
+
+            <p>${escaparTexto(msg.mensagem)}</p>
+        </div>
+    `;
+});
+
+    mensagensChatAdmin.scrollTop = mensagensChatAdmin.scrollHeight;
+}
+
+if(btnEnviarChatAdmin){
+    btnEnviarChatAdmin.addEventListener("click", async () => {
+
+        const mensagem = inputChatAdmin.value.trim();
+
+        if(!mensagem){
+            return;
+        }
+
+        const { error } = await supabaseClient
+            .from("mensagens_agendamento")
+            .insert([
+                {
+                    agendamento_id: chatAdminAgendamentoId,
+                    user_id: chatAdminUserId,
+                    remetente: "admin",
+                    mensagem,
+                    lida: false
+                }
+            ]);
+
+        if(error){
+            console.log(error);
+            abrirAviso("Erro ao enviar mensagem: " + error.message);
+            return;
+        }
+
+        inputChatAdmin.value = "";
+
+        carregarChatAdmin();
+    });
+}
+
+if(fecharChatAdmin){
+    fecharChatAdmin.addEventListener("click", () => {
+        overlayChatAdmin.classList.remove("ativo");
+        chatAdminAgendamentoId = null;
+        chatAdminUserId = null;
+    });
+}
+
+
+// INICIAR
 
 // INICIAR
 
