@@ -295,8 +295,24 @@ function responderBot(opcao){
         digitandoFake(() => {
 
             adicionarMensagem(`
-                Beleza. Clique abaixo para chamar no WhatsApp:<br><br>
-                <a href="https://wa.me/5582991156122" target="_blank" class="bot-link">Abrir WhatsApp</a>
+                Ok. Clique abaixo para chamar no WhatsApp:<br><br>
+                <a href="https://wa.me/5582991156122" target="_blank" class="bot-link">📞Abrir WhatsApp</a>
+            `, "bot");
+
+            adicionarBotaoVoltar();
+
+        });
+    }
+
+    if(opcao === "banlek"){
+
+        adicionarMensagem("Quero ver o Banlek", "user");
+
+        digitandoFake(() => {
+
+            adicionarMensagem(`
+                Ok. Clique abaixo para ir para o Banlek:<br><br>
+                <a href="https://banlek.com/Marcello1" target="_blank" class="bot-link">🔗Abrir Banlek</a>
             `, "bot");
 
             adicionarBotaoVoltar();
@@ -675,6 +691,7 @@ function mostrarMenuInicial(){
         <button onclick="responderBot('valores')">Valores 💰</button>
         <button onclick="responderBot('horarios')">Horários 🕔</button>
         <button onclick="responderBot('whatsapp')">Falar no WhatsApp 📲</button>
+        <button onclick="responderBot('banlek')">Ver Banlek 🔗</button>
     `;
 
     chatbotMensagens.appendChild(div);
