@@ -414,7 +414,10 @@ async function confirmarAgendamento(id, nome, whatsapp, dia, hora, local){
     const numero = limparNumero(whatsapp);
 
     const mensagem =
-`Olá, ${nome}! Seu agendamento com a LzzSportShot foi confirmado.
+`
+*assistente virtual Milly*
+
+Olá, ${nome}!  Seu agendamento com a LzzSportShot foi confirmado.
 
 Data: ${dia}
 Horário: ${hora}
@@ -520,7 +523,10 @@ carregarAgendamentos();
 if(!semMotivo){
 
     const mensagem =
-`Olá, ${nome}.
+`
+*assistente virtual Milly*
+
+Olá, ${nome}.
 
 Seu agendamento para ${dia} às ${hora} foi ${textoAcao}.
 

@@ -764,15 +764,36 @@ document.addEventListener("mouseup", () => {
     movendo = false;
 });
 
-const listaHorariosPublicos = document.querySelector("#listaHorariosPublicos");
+function formatarData(data){
+
+    if(data.includes("-")){
+
+        const partes = data.split("-");
+
+        return `${partes[2]}/${partes[1]}`;
+    }
+
+    return data;
+}
+
+function formatarHora(hora){
+
+    return hora.slice(0,5);
+}
+
+function primeiroNome(nome){
+
+    return nome.split(" ")[0];
+}
 
 async function carregarHorariosPublicos(){
 
     const { data, error } = await supabaseClient
         .from("agendamentos")
-        .select("data, hora, local, status")
+        .select("dia, hora, local, status")
         .in("status", ["pendente", "confirmado"])
-        .order("data", { ascending: true })
+        .order("dia", { ascending: true })
+        .select("nome, dia, hora, local, status, tipo")
         .order("hora", { ascending: true });
 
     if(error){
@@ -793,24 +814,33 @@ async function carregarHorariosPublicos(){
         const card = document.createElement("div");
         card.classList.add("horario-publico-card");
 
-        card.innerHTML = `
-            <div>
-                <strong>${formatarData(item.data)} às ${item.hora}</strong>
-                <p>${item.local || "Local não informado"}</p>
-            </div>
+card.innerHTML = `
+    <span class="status-publico ${item.status}">
+        ${item.status === "confirmado" ? "Confirmado" : "Pendente"}
+    </span>
 
-            <span class="status-publico ${item.status}">
-                ${item.status === "confirmado" ? "Confirmado" : "Pendente"}
-            </span>
-        `;
+    <p class="nome-publico">
+        ${primeiroNome(item.nome)}
+    </p>
+
+    <p class="categoria-publica">
+        ${item.tipo}
+    </p>
+
+    <div class="data-hora">
+        <h3>${formatarData(item.dia)}</h3>
+        <h4>${formatarHora(item.hora)}</h4>
+    </div>
+
+    <div class="linha-card"></div>
+
+    <p class="local-publico">
+        📍 ${item.local || "Local não informado"}
+    </p>
+`;
 
         listaHorariosPublicos.appendChild(card);
     });
-}
-
-function formatarData(data){
-    const partes = data.split("-");
-    return `${partes[2]}/${partes[1]}/${partes[0]}`;
 }
 
 carregarHorariosPublicos();

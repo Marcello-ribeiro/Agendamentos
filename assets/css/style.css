@@ -1043,9 +1043,15 @@ section p{
     }
 
     .fz-agendamento{
-        width: 170px;
-        padding: 15px;
+        width: 160px;
+        padding: 12px;
     }
+
+    .Banlek{
+    
+    padding: 12px;
+  
+}
 
     .trabalhos{
         padding-top: 100px;
@@ -1435,6 +1441,18 @@ section p{
     letter-spacing: .4px;
 }
 
+.nome-publico{
+    color: white !important;
+
+    font-size: .95rem !important;
+
+    font-weight: 600;
+
+    margin: 0 0 14px !important;
+
+    text-align: left;
+}
+
 @media(max-width: 768px){
 
     .stats{
@@ -1466,57 +1484,180 @@ section p{
     }
 }
 
+
 .agenda-publica{
-    padding: 60px 20px;
-    max-width: 900px;
-    margin: auto;
-    color: white;
+    padding: 70px 20px;
+    text-align: center;
 }
 
 .agenda-publica h2{
-    font-size: 2rem;
+    font-size: 3rem;
+    font-weight: 400;
+    color: white;
     margin-bottom: 10px;
 }
 
+.agenda-publica h2 span{
+    color: rgb(138,138,245);
+}
+
 .agenda-publica > p{
-    opacity: 0.8;
-    margin-bottom: 25px;
+    color: rgba(255,255,255,.58);
+    font-size: 1rem;
+    margin-bottom: 40px;
 }
 
 .lista-horarios-publicos{
     display: flex;
-    flex-direction: column;
-    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
 }
 
 .horario-publico-card{
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 14px;
-    padding: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    width: 330px;
+
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(138,138,245,.22);
+    border-radius: 22px;
+
+    padding: 20px;
+    text-align: left;
+    backdrop-filter: blur(8px);
+
+    transition: 
+        transform .35s ease,
+        opacity .35s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
 }
 
-.horario-publico-card p{
-    margin-top: 6px;
-    opacity: 0.75;
+.lista-horarios-publicos:has(.horario-publico-card:hover) 
+.horario-publico-card:not(:hover){
+    transform: scale(0.94);
+    opacity: 0.55;
+}
+
+.horario-publico-card:hover{
+    transform: translateY(-10px) scale(1.03);
+    opacity: 1;
+    z-index: 2;
+
+    border-color: rgba(138,138,245,.45);
+
+    box-shadow:
+        0 0 25px rgba(138,138,245,.18);
 }
 
 .status-publico{
-    padding: 7px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    border-radius: 999px;
+
+    font-size: .75rem;
+    font-weight: 700;
+
+    margin-bottom: 18px;
 }
 
 .status-publico.confirmado{
-    background: #22c55e;
-    color: white;
+    background: rgba(34,197,94,.15);
+    color: #22c55e;
 }
 
 .status-publico.pendente{
-    background: #facc15;
-    color: black;
+    background: rgba(250,204,21,.15);
+    color: #facc15;
+}
+
+.categoria-publica{
+    color: rgb(138,138,245) !important;
+
+    font-size: .72rem !important;
+
+    letter-spacing: 2px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    margin: 0 0 16px !important;
+
+    text-align: left;
+}
+
+.data-hora h3{
+    color: white;
+
+    font-size: 1.4rem;
+
+    line-height: 1;
+
+    margin-bottom: 10px;
+}
+
+.data-hora h4{
+    color: white;
+
+    font-size: 1.2em;
+
+    line-height: 1;
+
+    font-weight: 700;
+}
+
+.linha-card{
+    width: 100%;
+    height: 1px;
+
+    background: rgba(255,255,255,.08);
+
+    margin: 22px 0 18px;
+}
+
+.local-publico{
+    color: rgba(255,255,255,.72) !important;
+
+    font-size: .9rem !important;
+
+    margin: 0 !important;
+
+    text-align: left;
+}
+
+@media(max-width: 768px){
+
+    .agenda-publica h2{
+        font-size: 2.2rem;
+    }
+
+    .horario-publico-card{
+        width: 100%;
+        max-width: 100px;
+    }
+
+}
+
+
+@media (max-width: 768px){
+
+    .agenda-publica h2{
+        font-size: 2.5rem;
+    }
+
+    .agenda-publica > p{
+        font-size: 0.95rem;
+    }
+
+    .horario-publico-card{
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .horario-publico-card strong{
+        font-size: 1.6rem;
+    }
+
 }
