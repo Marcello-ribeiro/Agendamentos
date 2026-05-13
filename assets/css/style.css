@@ -1465,3 +1465,58 @@ section p{
         line-height: 1.3;
     }
 }
+
+.agenda-publica{
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+    color: white;
+}
+
+.agenda-publica h2{
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.agenda-publica > p{
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+.lista-horarios-publicos{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.horario-publico-card{
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.horario-publico-card p{
+    margin-top: 6px;
+    opacity: 0.75;
+}
+
+.status-publico{
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-publico.confirmado{
+    background: #22c55e;
+    color: white;
+}
+
+.status-publico.pendente{
+    background: #facc15;
+    color: black;
+}

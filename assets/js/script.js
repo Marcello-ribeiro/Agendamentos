@@ -763,3 +763,54 @@ document.addEventListener("mousemove", (e) => {
 document.addEventListener("mouseup", () => {
     movendo = false;
 });
+
+const listaHorariosPublicos = document.querySelector("#listaHorariosPublicos");
+
+async function carregarHorariosPublicos(){
+
+    const { data, error } = await supabaseClient
+        .from("agendamentos")
+        .select("data, hora, local, status")
+        .in("status", ["pendente", "confirmado"])
+        .order("data", { ascending: true })
+        .order("hora", { ascending: true });
+
+    if(error){
+        console.log(error);
+        listaHorariosPublicos.innerHTML = "<p>Erro ao carregar horários.</p>";
+        return;
+    }
+
+    if(!data || data.length === 0){
+        listaHorariosPublicos.innerHTML = "<p>Nenhum horário agendado no momento.</p>";
+        return;
+    }
+
+    listaHorariosPublicos.innerHTML = "";
+
+    data.forEach(item => {
+
+        const card = document.createElement("div");
+        card.classList.add("horario-publico-card");
+
+        card.innerHTML = `
+            <div>
+                <strong>${formatarData(item.data)} às ${item.hora}</strong>
+                <p>${item.local || "Local não informado"}</p>
+            </div>
+
+            <span class="status-publico ${item.status}">
+                ${item.status === "confirmado" ? "Confirmado" : "Pendente"}
+            </span>
+        `;
+
+        listaHorariosPublicos.appendChild(card);
+    });
+}
+
+function formatarData(data){
+    const partes = data.split("-");
+    return `${partes[2]}/${partes[1]}/${partes[0]}`;
+}
+
+carregarHorariosPublicos();
