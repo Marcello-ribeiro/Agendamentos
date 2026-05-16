@@ -796,6 +796,8 @@ if(fecharChatAdmin){
 
 // INICIAR
 
+*/
+
 verificarLogin();
 carregarAgendamentos();
 
@@ -823,4 +825,3 @@ supabaseClient
 )
 
 .subscribe();
-*/
