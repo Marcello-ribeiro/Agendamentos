@@ -1826,6 +1826,7 @@ section p{
 .cliente-nv a{
     text-decoration: none;
     color: rgb(138,138,245);
+    color: black;
 }
 
 .acoes-cliente{
