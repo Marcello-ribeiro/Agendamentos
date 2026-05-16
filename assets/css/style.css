@@ -1803,9 +1803,11 @@ section p{
     border-radius: 12px;
     border: 1px solid rgba(138,138,245,.3);
 
-    background: rgba(255,255,255,.03);
+    background: rgb(138,138,245);;
 
     transition: .25s;
+
+    cursor: pointer;
 }
 
 .cliente-nv:hover{

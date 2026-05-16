@@ -28,6 +28,7 @@ if(posX && posY && chatbotBox){
     chatbotBox.style.right = "auto";
     chatbotBox.style.bottom = "auto";
 }
+    
 
 
 // CARROSSEL
@@ -178,6 +179,7 @@ if(toastBtn){
 
     });
 }
+
 
 
 // ABRIR / FECHAR CHAT
@@ -515,36 +517,49 @@ function validarRespostaChat(resposta){
         }
     }
 
-    if(campoAtual === "hora"){
+if(campoAtual === "hora"){
 
-        const horaValida =
-        /^([01]\d|2[0-3]):([0-5]\d)$/.test(resposta);
+    let horaNormalizada = resposta
+        .toLowerCase()
+        .trim()
+        .replace(/\s/g, "")
+        .replace("h", ":")
+        .replace("/", ":")
+        .replace(".", ":");
 
-        if(!horaValida){
-            mensagemErroValidacao(`
-                ⚠️ Digite um horário válido.<br><br>
-                Exemplo correto:<br>
-                <strong>16:30</strong>
-            `);
-
-            return false;
-        }
+    if(/^\d{1,2}$/.test(horaNormalizada)){
+        horaNormalizada = horaNormalizada + ":00";
     }
 
-    if(campoAtual === "local"){
-
-        if(resposta.length < 3){
-            mensagemErroValidacao(`
-                ⚠️ Digite um local válido.<br><br>
-                Exemplo:<br>
-                <strong>Campo do CSA</strong>
-            `);
-
-            return false;
-        }
+    if(/^\d{1,2}:$/.test(horaNormalizada)){
+        horaNormalizada = horaNormalizada.replace(":", ":00");
     }
 
-    return true;
+    const horaValida =
+    /^([01]?\d|2[0-3]):([0-5]\d)$/.test(horaNormalizada);
+
+    if(!horaValida){
+        mensagemErroValidacao(`
+            ⚠️ Digite um horário válido.<br><br>
+            Exemplos aceitos:<br>
+            <strong>
+                16:30<br>
+                16/30<br>
+                16h30<br>
+                16h<br>
+                08h<br>
+                9h<br>
+                18.40
+            </strong>
+        `);
+
+        return false;
+    }
+
+    resposta = horaNormalizada;
+}
+
+    return resposta;
 }
 
 async function enviarRespostaChat(){
@@ -559,15 +574,15 @@ async function enviarRespostaChat(){
         return;
     }
 
-    const valido = validarRespostaChat(resposta);
+    const respostaValidada = validarRespostaChat(resposta);
 
-    if(!valido){
-        return;
-    }
+if(!respostaValidada){
+    return;
+}
 
-    adicionarMensagem(resposta, "user");
+adicionarMensagem(respostaValidada, "user");
 
-    dadosChat[camposChat[etapaChat]] = resposta;
+dadosChat[camposChat[etapaChat]] = respostaValidada;
 
     input.parentElement.remove();
 
@@ -778,6 +793,7 @@ document.addEventListener("mouseup", () => {
     movendo = false;
 });
 
+
 function formatarData(data){
 
     if(data.includes("-")){
@@ -858,6 +874,7 @@ card.innerHTML = `
 }
 
 carregarHorariosPublicos();
+/*
 const loginOpcional = document.querySelector("#loginOpcional");
 const continuarSemLogin = document.querySelector("#continuarSemLogin");
 
@@ -952,3 +969,4 @@ setInterval(
 );
 
 controlarTelaLoginOpcional();
+*/

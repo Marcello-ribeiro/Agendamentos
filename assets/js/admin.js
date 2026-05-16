@@ -214,9 +214,9 @@ async function carregarAgendamentos(){
 
     <button 
     class="btn-chat-admin"
-    onclick="abrirChatAdmin(${item.id}, '${item.user_id || ""}', '${nome}')"
+    onclick="abrirWhatsApp('${whatsapp}', 'Olá, ${nome}! Estou entrando em contato em nome da LzzSportShot para falar sobre seu agendamento para ${dia} às ${hora}.')"
 >
-    Abrir conversa
+    Abrir WhatsApp
 </button>
 
                 </div>
@@ -680,7 +680,7 @@ function escaparTexto(texto){
 }
 
 
-
+/*
 const overlayChatAdmin = document.querySelector("#overlayChatAdmin");
 const fecharChatAdmin = document.querySelector("#fecharChatAdmin");
 const mensagensChatAdmin = document.querySelector("#mensagensChatAdmin");
@@ -823,3 +823,4 @@ supabaseClient
 )
 
 .subscribe();
+*/

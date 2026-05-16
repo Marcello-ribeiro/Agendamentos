@@ -8,6 +8,8 @@ const supabaseClient = supabase.createClient(
     SUPABASE_KEY
 );
 
+
+/*
 const lista = document.querySelector(".lista-cliente");
 const logout = document.querySelector("#logout");
 const voltarSite = document.querySelector("#voltarSite");
@@ -486,3 +488,4 @@ supabaseClient
 )
 
 .subscribe();
+*/
