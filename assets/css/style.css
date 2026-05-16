@@ -1823,10 +1823,6 @@ section p{
     box-shadow: 0 0 18px rgba(138,138,245,.25);
 }
 
-.cliente-nv a{
-    text-decoration: none;
-    color: black;
-}
 
 .acoes-cliente{
     display: flex;
