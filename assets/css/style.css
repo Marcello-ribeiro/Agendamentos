@@ -2111,7 +2111,7 @@ section p{
 
 
 
-@media(max-width: 600px){
+@media(max-width: 768px){
 
     .painel-cliente{
         padding: 28px 16px;
@@ -2646,7 +2646,7 @@ section p{
     color: rgb(170,170,255);
 }
 
-@media(max-width: 600px){
+@media(max-width: 768px){
 
     .cliente-topo{
         flex-direction: column;
