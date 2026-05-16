@@ -1797,6 +1797,10 @@ section p{
     gap: 12px;
 }
 
+.nav-botoes a{
+    text-decoration: none;
+}
+
 .cliente-nv{
     margin-top: 2px;
     padding: 6px;
