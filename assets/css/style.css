@@ -2682,3 +2682,8 @@ section p{
         white-space: nowrap;
     }
 }
+
+.cliente-nv a:visited,
+.cliente-nv a:link{
+    color: white !important;
+}
