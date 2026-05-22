@@ -421,8 +421,7 @@ function limparNumero(whatsapp){
 
 function abrirWhatsApp(numero, mensagem){
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-
-    window.location.href = url;
+    window.open(url, "_blank");
 }
 
 
