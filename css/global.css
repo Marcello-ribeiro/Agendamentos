@@ -1198,24 +1198,23 @@ main{
         margin-top:24px;
     }
 
-    .hero-highlights{
-        bottom:px;
-    }
 
     .portfolio-section{
         padding-top:28px;
     }
 }
 
-@media(max-width:420px){
-
-    .hero{
-        min-height:500px;
-    }
+@media(max-width:620px){
 
     .hero-highlights{
+        left:50%;
+        transform:translateX(-50%);
         bottom:-20px;
+
+        width:100%;
+        max-width:520px;
     }
+
 }
 
 @keyframes bounce{
