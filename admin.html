@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin | LZZ SportShot</title>
+
+    <link rel="shortcut icon" href="assets/midia/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body class="admin-body">
+
+<header class="admin-header">
+
+    <a href="index.html" class="admin-logo">
+        LZZ <span>ADMIN</span>
+    </a>
+
+    <nav class="admin-nav">
+        <a href="index.html">Ver site</a>
+        <button class="sair" type="button">Sair</button>
+    </nav>
+
+</header>
+
+<main class="admin-main">
+
+    <section class="admin-hero">
+
+        <p class="section-tag">
+            PAINEL ADMINISTRATIVO
+        </p>
+
+        <h1>
+            Controle geral.
+        </h1>
+
+        <p>
+            Gerencie agendamentos, portfólio do site e ações rápidas com clientes.
+        </p>
+
+    </section>
+
+    <section class="admin-resumo">
+
+        <div class="admin-resumo-card">
+            <span>Total</span>
+            <strong id="totalAgendamentos">0</strong>
+        </div>
+
+        <div class="admin-resumo-card">
+            <span>Pendentes</span>
+            <strong id="totalPendentes">0</strong>
+        </div>
+
+        <div class="admin-resumo-card">
+            <span>Confirmados</span>
+            <strong id="totalConfirmados">0</strong>
+        </div>
+
+    </section>
+
+    <section class="admin-tabs">
+
+        <button class="tab-btn ativo" type="button" data-tab="agendamentos">
+            Agendamentos
+        </button>
+
+        <button class="tab-btn" type="button" data-tab="novo-agendamento">
+            Criar agendamento
+        </button>
+
+        <button class="tab-btn" type="button" data-tab="portfolio">
+            Portfólio
+        </button>
+
+    </section>
+
+    <section class="admin-tab-content ativo" id="tab-agendamentos">
+
+        <div class="admin-section-top">
+
+            <div>
+                <p class="section-tag">AGENDA</p>
+                <h2>Agendamentos recebidos.</h2>
+            </div>
+
+        </div>
+
+        <div class="filtros">
+            <button class="ativo" type="button">Pendentes</button>
+            <button type="button">Confirmados</button>
+            <button type="button">Feitos</button>
+            <button type="button">Cancelados</button>
+            <button type="button">Recusados</button>
+            <button type="button">Todos</button>
+        </div>
+
+        <section class="lista-agendamentos"></section>
+
+    </section>
+
+    <section class="admin-tab-content" id="tab-novo-agendamento">
+
+        <div class="admin-section-top">
+
+            <div>
+                <p class="section-tag">CRIAR MANUALMENTE</p>
+                <h2>Novo agendamento.</h2>
+                <p>
+                    Use quando quiser cadastrar um horário direto pelo painel.
+                </p>
+            </div>
+
+        </div>
+
+        <form class="admin-form" id="formAdminAgendamento">
+
+            <div class="campo full">
+                <label for="adminNome">Nome do cliente *</label>
+                <input type="text" id="adminNome" placeholder="Nome do cliente" required>
+            </div>
+
+            <div class="campo">
+                <label for="adminWhatsapp">WhatsApp *</label>
+                <input type="tel" id="adminWhatsapp" placeholder="(82) 99999-9999" required>
+            </div>
+
+            <div class="campo">
+                <label for="adminTipo">Tipo *</label>
+                <select id="adminTipo" required>
+                    <option value="">Selecione</option>
+                    <option>Futebol</option>
+                    <option>Evento</option>
+                    <option>Ensaio</option>
+                    <option>Outro</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="adminDia">Dia *</label>
+                <input type="text" id="adminDia" placeholder="dd/mm" maxlength="5" required>
+            </div>
+
+            <div class="campo">
+                <label for="adminHora">Horário *</label>
+                <input type="time" id="adminHora" required>
+            </div>
+
+            <div class="campo full">
+                <label for="adminLocal">Local</label>
+                <input type="text" id="adminLocal" placeholder="Campo, estádio, endereço...">
+            </div>
+
+            <div class="campo full">
+                <label for="adminObs">Observações</label>
+                <textarea id="adminObs" placeholder="Detalhes do agendamento..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-confirmar">
+                Criar agendamento
+            </button>
+
+        </form>
+
+    </section>
+
+    <section class="admin-tab-content" id="tab-portfolio">
+
+        <div class="admin-section-top">
+
+            <div>
+                <p class="section-tag">PORTFÓLIO</p>
+                <h2>Fotos do index.</h2>
+                <p>
+                    Cadastre trabalhos que aparecerão automaticamente no site.
+                </p>
+            </div>
+
+        </div>
+
+        <form class="admin-form" id="formPortfolio">
+
+            <input type="hidden" id="portfolioId">
+
+            <div class="campo full">
+                <label for="portfolioTitulo">Título *</label>
+                <input type="text" id="portfolioTitulo" placeholder="Ex: Torneio de várzea" required>
+            </div>
+
+            <div class="campo">
+                <label for="portfolioCategoria">Categoria *</label>
+                <select id="portfolioCategoria" required>
+                    <option value="">Selecione</option>
+                    <option>Futebol</option>
+                    <option>Evento</option>
+                    <option>Ensaio</option>
+                    <option>Outro</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="portfolioAno">Ano *</label>
+                <input type="number" id="portfolioAno" placeholder="2026" required>
+            </div>
+
+            <div class="campo">
+                <label for="portfolioTamanho">Tamanho do card *</label>
+                <select id="portfolioTamanho" required>
+                    <option value="grande">Grande</option>
+                    <option value="vertical">Vertical</option>
+                    <option value="horizontal">Horizontal</option>
+                    <option value="normal">Normal</option>
+                    <option value="quadrado">Quadrado</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="portfolioOrdem">Ordem</label>
+                <input type="number" id="portfolioOrdem" placeholder="1">
+            </div>
+
+            <div class="campo full">
+                <label for="portfolioImagens">Fotos do carrossel *</label>
+                <input type="file" id="portfolioImagens" accept="image/*" multiple>
+                <small class="admin-help">
+                    Selecione uma ou mais fotos. Elas formarão o carrossel desse card.
+                </small>
+            </div>
+
+            <div class="campo full checkbox-line">
+                <input type="checkbox" id="portfolioAtivo" checked>
+                <label for="portfolioAtivo">Mostrar no Portfólio</label>
+            </div>
+
+            <button type="submit" class="btn-confirmar">
+                Salvar trabalho
+            </button>
+
+        </form>
+
+        <div class="portfolio-admin-lista" id="portfolioAdminLista">
+            <p>Os trabalhos cadastrados aparecerão aqui.</p>
+        </div>
+
+    </section>
+
+</main>
+
+<div id="confirm-overlay" class="confirm-overlay">
+
+    <div class="confirm-box">
+
+        <p id="confirm-msg"></p>
+
+        <div class="confirm-botoes">
+            <button id="confirm-ok" type="button">Confirmar</button>
+            <button id="confirm-cancel" type="button">Cancelar</button>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="motivo-overlay" class="motivo-overlay">
+
+    <div class="motivo-box">
+
+        <h3>Motivo da ação</h3>
+
+        <textarea
+            id="motivo-texto"
+            placeholder="Digite o motivo para enviar ao cliente..."
+        ></textarea>
+
+        <div class="sem-motivo-box">
+            <input type="checkbox" id="semMotivo">
+            <label for="semMotivo">Não informar motivo</label>
+        </div>
+
+        <div class="motivo-botoes">
+            <button id="motivo-cancelar" type="button">Cancelar</button>
+            <button id="motivo-enviar" type="button">Continuar</button>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal-avaliacao" id="modalAvaliacao">
+
+    <div class="box-avaliacao">
+
+        <h2>Avaliar cliente</h2>
+
+        <label for="notaCliente">Nota do cliente</label>
+        <select id="notaCliente">
+            <option value="">Selecione</option>
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="1">★☆☆☆☆</option>
+        </select>
+
+        <label for="avaliacaoCliente">Comentário</label>
+        <textarea
+            id="avaliacaoCliente"
+            placeholder="Escreva sua avaliação..."
+        ></textarea>
+
+        <div class="acoes-avaliacao">
+            <button id="cancelarAvaliacao" type="button">Cancelar</button>
+            <button id="salvarAvaliacao" type="button">Salvar avaliação</button>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="toast-overlay" class="toast-overlay">
+
+    <div class="toast-box">
+
+        <p id="toast-msg"></p>
+
+        <button id="toast-btn" type="button">
+            OK
+        </button>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+</html>

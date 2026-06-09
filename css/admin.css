@@ -1,0 +1,903 @@
+@charset "UTF-8";
+
+/* =========================
+   BASE ADMIN
+========================= */
+
+.admin-body{
+    background:
+        radial-gradient(circle at 10% 0%, rgba(56,189,248,.14), transparent 32%),
+        radial-gradient(circle at 90% 12%, rgba(37,99,235,.20), transparent 34%),
+        linear-gradient(180deg, #02040a 0%, #050b18 48%, #02040a 100%);
+}
+
+.admin-header{
+    width:min(var(--max), calc(100% - 40px));
+    min-height:82px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.admin-logo{
+    font-size:18px;
+    font-weight:900;
+    letter-spacing:.08em;
+    color:white;
+}
+
+.admin-logo span{
+    color:var(--blue);
+    font-size:12px;
+    letter-spacing:.18em;
+    margin-left:6px;
+}
+
+.admin-nav{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.admin-nav a,
+.sair{
+    min-height:42px;
+    padding:0 16px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.admin-nav a{
+    color:white;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(56,189,248,.14);
+}
+
+.sair{
+    border:none;
+    color:#020617;
+    background:linear-gradient(135deg, var(--blue), #60a5fa);
+}
+
+.admin-nav a:hover,
+.sair:hover{
+    transform:translateY(-2px);
+}
+
+.admin-main{
+    width:min(var(--max), calc(100% - 40px));
+    margin:0 auto;
+    padding:40px 0 90px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.admin-hero{
+    padding:42px 0 34px;
+}
+
+.admin-hero h1{
+    font-family:"Cormorant Garamond", serif;
+    font-size:clamp(3.8rem, 8vw, 7rem);
+    line-height:.84;
+    letter-spacing:-.06em;
+    color:white;
+}
+
+.admin-hero p:not(.section-tag){
+    max-width:620px;
+    color:var(--muted);
+    line-height:1.7;
+    margin-top:18px;
+}
+
+/* =========================
+   RESUMO
+========================= */
+
+.admin-resumo{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+    margin:18px 0 26px;
+}
+
+.admin-resumo-card{
+    padding:24px;
+    border-radius:var(--radius);
+    background:
+        radial-gradient(circle at top left, rgba(56,189,248,.14), transparent 34%),
+        linear-gradient(180deg, rgba(15,23,42,.78), rgba(2,6,23,.84));
+    border:1px solid rgba(56,189,248,.14);
+    box-shadow:0 24px 70px rgba(0,0,0,.22);
+}
+
+.admin-resumo-card span{
+    display:block;
+    color:var(--muted);
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.admin-resumo-card strong{
+    display:block;
+    color:var(--blue);
+    font-size:42px;
+    line-height:1;
+}
+
+/* =========================
+   TABS
+========================= */
+
+.admin-tabs{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    padding:10px;
+    border-radius:999px;
+    width:fit-content;
+    max-width:100%;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(56,189,248,.12);
+    margin-bottom:30px;
+}
+
+.tab-btn{
+    min-height:42px;
+    border:none;
+    border-radius:999px;
+    padding:0 16px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:900;
+    color:var(--muted);
+    background:transparent;
+    transition:.2s;
+}
+
+.tab-btn.ativo,
+.tab-btn:hover{
+    color:#020617;
+    background:linear-gradient(135deg, var(--blue), #60a5fa);
+}
+
+.admin-tab-content{
+    display:none;
+}
+
+.admin-tab-content.ativo{
+    display:block;
+}
+
+.admin-section-top{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:22px;
+}
+
+.admin-section-top h2{
+    font-family:"Cormorant Garamond", serif;
+    font-size:clamp(2.8rem, 5vw, 4.4rem);
+    line-height:.9;
+    letter-spacing:-.04em;
+}
+
+.admin-section-top p:not(.section-tag){
+    color:var(--muted);
+    margin-top:12px;
+    line-height:1.7;
+}
+
+/* =========================
+   FILTROS
+========================= */
+
+.filtros{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:0 0 22px;
+}
+
+.filtros button{
+    min-height:40px;
+    border:1px solid rgba(56,189,248,.16);
+    border-radius:999px;
+    padding:0 14px;
+    color:var(--muted);
+    background:rgba(255,255,255,.035);
+    cursor:pointer;
+    font-size:12px;
+    font-weight:900;
+    transition:.2s;
+}
+
+.filtros button.ativo,
+.filtros button:hover{
+    color:#020617;
+    border-color:transparent;
+    background:linear-gradient(135deg, var(--blue), #60a5fa);
+}
+
+/* =========================
+   LISTA AGENDAMENTOS
+========================= */
+
+.lista-agendamentos{
+    display:grid;
+    gap:16px;
+}
+
+.agendamento-card{
+    background:
+        radial-gradient(circle at top left, rgba(56,189,248,.10), transparent 32%),
+        linear-gradient(180deg, rgba(15,23,42,.72), rgba(2,6,23,.86));
+    border:1px solid rgba(56,189,248,.14);
+    border-radius:var(--radius);
+    padding:22px;
+    box-shadow:0 24px 70px rgba(0,0,0,.23);
+}
+
+.agendamento-topo{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:18px;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    white-space:nowrap;
+}
+
+.status.pendente{
+    color:#facc15;
+    background:rgba(250,204,21,.12);
+    border:1px solid rgba(250,204,21,.20);
+}
+
+.status.confirmado{
+    color:#22c55e;
+    background:rgba(34,197,94,.12);
+    border:1px solid rgba(34,197,94,.20);
+}
+
+.status.cancelado,
+.status.recusado{
+    color:#f87171;
+    background:rgba(248,113,113,.12);
+    border:1px solid rgba(248,113,113,.20);
+}
+
+.status.feito{
+    color:var(--blue);
+    background:rgba(56,189,248,.12);
+    border:1px solid rgba(56,189,248,.20);
+}
+
+.bloco-data{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:8px;
+}
+
+.titulo-data{
+    color:var(--muted);
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+}
+
+.data{
+    display:inline-flex;
+    align-items:center;
+    padding:8px 13px;
+    border-radius:999px;
+    color:white;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(56,189,248,.14);
+    font-size:13px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.agendamento-card h2{
+    color:white;
+    font-size:28px;
+    line-height:1.1;
+    margin-bottom:16px;
+    font-weight:900;
+}
+
+.info{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.info p{
+    margin:0;
+    color:var(--soft);
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.06);
+    padding:12px;
+    border-radius:14px;
+    line-height:1.45;
+    font-size:14px;
+}
+
+.info strong{
+    color:var(--blue);
+    font-weight:900;
+}
+
+.avaliacao-card{
+    grid-column:1 / -1;
+    padding:14px;
+    border-radius:16px;
+    background:rgba(56,189,248,.075);
+    border:1px solid rgba(56,189,248,.14);
+}
+
+.acoes{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.acoes button{
+    min-height:40px;
+    border:none;
+    border-radius:999px;
+    padding:0 14px;
+    color:white;
+    font-size:12px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.acoes button:hover{
+    transform:translateY(-2px);
+}
+
+.confirmar{
+    background:#16a34a;
+}
+
+.recusar{
+    background:#dc2626;
+}
+
+.cancelar{
+    background:#f97316;
+}
+
+.feito{
+    background:#2563eb;
+}
+
+.excluir{
+    background:#111827;
+}
+
+.btn-chat-admin{
+    background:linear-gradient(135deg, var(--blue), #60a5fa) !important;
+    color:#020617 !important;
+}
+
+/* =========================
+   FORM ADMIN
+========================= */
+
+.admin-form{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:16px;
+    padding:24px;
+    border-radius:var(--radius);
+    background:
+        radial-gradient(circle at top left, rgba(56,189,248,.12), transparent 34%),
+        rgba(255,255,255,.035);
+    border:1px solid rgba(56,189,248,.14);
+    box-shadow:0 24px 70px rgba(0,0,0,.22);
+    margin-bottom:24px;
+}
+
+.admin-help{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.5;
+}
+
+.checkbox-line{
+    display:flex;
+    align-items:center;
+    flex-direction:row;
+    gap:10px;
+    min-height:48px;
+    padding:12px;
+    border-radius:14px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.checkbox-line input{
+    width:18px;
+    height:18px;
+    accent-color:var(--blue);
+}
+
+.checkbox-line label{
+    margin:0;
+}
+
+/* =========================
+   PORTFOLIO ADMIN
+========================= */
+
+.portfolio-admin-lista{
+    display:grid;
+    gap:14px;
+}
+
+.portfolio-admin-lista > p{
+    color:var(--muted);
+    padding:24px;
+    border-radius:var(--radius);
+    background:rgba(255,255,255,.035);
+    border:1px dashed rgba(56,189,248,.18);
+}
+
+.portfolio-admin-card{
+    display:grid;
+    grid-template-columns:160px 1fr auto;
+    gap:18px;
+    align-items:center;
+    padding:16px;
+    border-radius:var(--radius);
+    background:
+        linear-gradient(180deg, rgba(15,23,42,.76), rgba(2,6,23,.86));
+    border:1px solid rgba(56,189,248,.14);
+}
+
+.portfolio-admin-thumb{
+    width:160px;
+    height:110px;
+    border-radius:18px;
+    overflow:hidden;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.portfolio-admin-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.portfolio-admin-info h3{
+    color:white;
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.portfolio-admin-info p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+}
+
+.portfolio-admin-info span{
+    color:var(--blue);
+    font-weight:900;
+}
+
+.portfolio-admin-acoes{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+.portfolio-admin-acoes button{
+    min-height:38px;
+    border:none;
+    border-radius:999px;
+    padding:0 12px;
+    color:white;
+    font-size:12px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.btn-editar-portfolio{
+    background:#2563eb;
+}
+
+.btn-excluir-portfolio{
+    background:#dc2626;
+}
+
+/* =========================
+   MODAIS
+========================= */
+
+.confirm-overlay,
+.motivo-overlay,
+.modal-avaliacao{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(12px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    z-index:999999;
+    padding:20px;
+}
+
+.confirm-overlay.ativo,
+.motivo-overlay.ativo,
+.modal-avaliacao.ativo{
+    opacity:1;
+    pointer-events:all;
+}
+
+.confirm-box,
+.motivo-box,
+.box-avaliacao{
+    width:100%;
+    max-width:430px;
+    background:linear-gradient(180deg, #07152b, #020617);
+    border:1px solid rgba(56,189,248,.22);
+    border-radius:24px;
+    padding:24px;
+    color:white;
+    box-shadow:0 30px 90px rgba(0,0,0,.48);
+}
+
+.confirm-box p{
+    color:white;
+    line-height:1.6;
+    margin-bottom:22px;
+    text-align:center;
+}
+
+.confirm-botoes,
+.motivo-botoes,
+.acoes-avaliacao{
+    display:flex;
+    gap:10px;
+}
+
+.confirm-botoes button,
+.motivo-botoes button,
+.acoes-avaliacao button{
+    flex:1;
+    min-height:46px;
+    border:none;
+    border-radius:999px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+#confirm-ok,
+#motivo-enviar,
+#salvarAvaliacao{
+    background:linear-gradient(135deg, var(--blue), #60a5fa);
+    color:#020617;
+}
+
+#confirm-cancel,
+#motivo-cancelar,
+#cancelarAvaliacao{
+    background:rgba(255,255,255,.07);
+    color:white;
+}
+
+.motivo-box h3,
+.box-avaliacao h2{
+    color:white;
+    font-size:24px;
+    margin-bottom:18px;
+}
+
+.motivo-box textarea,
+.box-avaliacao textarea,
+.box-avaliacao select{
+    width:100%;
+    border:1px solid rgba(148,163,184,.18);
+    border-radius:16px;
+    background:rgba(2,6,23,.78);
+    color:white;
+    outline:none;
+    padding:14px;
+    font-size:15px;
+}
+
+.motivo-box textarea,
+.box-avaliacao textarea{
+    min-height:120px;
+    resize:none;
+}
+
+.sem-motivo-box{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:var(--muted);
+    font-size:13px;
+    margin:14px 0;
+}
+
+.sem-motivo-box input{
+    accent-color:var(--blue);
+}
+
+.box-avaliacao label{
+    display:block;
+    color:var(--blue);
+    font-size:12px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    margin:16px 0 8px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:900px){
+
+    .admin-resumo{
+        grid-template-columns:repeat(3, 1fr);
+    }
+
+    .admin-resumo-card{
+        padding:18px;
+    }
+
+    .admin-resumo-card strong{
+        font-size:32px;
+    }
+
+    .admin-form{
+        grid-template-columns:1fr;
+    }
+
+    .campo.full,
+    .admin-form .btn-confirmar{
+        grid-column:auto;
+    }
+
+    .info{
+        grid-template-columns:1fr;
+    }
+
+    .portfolio-admin-card{
+        grid-template-columns:130px 1fr;
+    }
+
+    .portfolio-admin-acoes{
+        grid-column:1 / -1;
+        justify-content:flex-start;
+    }
+
+    .portfolio-admin-thumb{
+        width:130px;
+        height:96px;
+    }
+}
+
+@media(max-width:620px){
+
+    .admin-header,
+    .admin-main{
+        width:calc(100% - 28px);
+    }
+
+    .admin-header{
+        min-height:auto;
+        padding:16px 0;
+        align-items:flex-start;
+    }
+
+    .admin-logo{
+        font-size:15px;
+    }
+
+    .admin-logo span{
+        display:block;
+        margin-left:0;
+        margin-top:3px;
+    }
+
+    .admin-nav{
+        gap:8px;
+    }
+
+    .admin-nav a,
+    .sair{
+        min-height:38px;
+        padding:0 12px;
+        font-size:12px;
+    }
+
+    .admin-main{
+        padding-top:18px;
+    }
+
+    .admin-hero{
+        padding:28px 0 24px;
+    }
+
+    .admin-hero h1{
+        font-size:3.4rem;
+    }
+
+    .admin-resumo{
+        grid-template-columns:repeat(3, 1fr);
+        gap:8px;
+    }
+
+    .admin-resumo-card{
+        padding:14px 10px;
+        border-radius:18px;
+    }
+
+    .admin-resumo-card span{
+        font-size:9px;
+        letter-spacing:.08em;
+        margin-bottom:8px;
+    }
+
+    .admin-resumo-card strong{
+        font-size:24px;
+    }
+
+    .admin-tabs{
+        width:100%;
+        border-radius:20px;
+        display:grid;
+        grid-template-columns:1fr;
+    }
+
+    .tab-btn{
+        width:100%;
+    }
+
+    .admin-section-top{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .admin-section-top h2{
+        font-size:3rem;
+    }
+
+    .filtros{
+        display:grid;
+        grid-template-columns:repeat(3, 1fr);
+        gap:6px;
+    }
+
+    .filtros button{
+        font-size:10px;
+        padding:0 6px;
+        min-height:36px;
+    }
+
+    .agendamento-card{
+        padding:16px;
+        border-radius:20px;
+    }
+
+    .agendamento-topo{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .bloco-data{
+        align-items:flex-start;
+    }
+
+    .agendamento-card h2{
+        font-size:22px;
+    }
+
+    .acoes{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .acoes button{
+        width:100%;
+        padding:0 10px;
+        font-size:11px;
+    }
+
+    .admin-form{
+        padding:18px;
+        border-radius:22px;
+    }
+
+    .portfolio-admin-card{
+        grid-template-columns:1fr;
+    }
+
+    .portfolio-admin-thumb{
+        width:100%;
+        height:190px;
+    }
+
+    .portfolio-admin-acoes{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .portfolio-admin-acoes button{
+        width:100%;
+    }
+
+    .confirm-botoes,
+    .motivo-botoes,
+    .acoes-avaliacao{
+        flex-direction:column;
+    }
+}
+
+@media(max-width:420px){
+
+    .admin-resumo-card strong{
+        font-size:21px;
+    }
+
+    .admin-hero h1{
+        font-size:3rem;
+    }
+
+    .filtros{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .acoes{
+        grid-template-columns:1fr;
+    }
+}

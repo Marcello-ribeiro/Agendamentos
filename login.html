@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login Admin | LZZ SportShot</title>
+
+    <link rel="shortcut icon" href="assets/midia/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/login.css">
+
+</head>
+
+<body class="login-page">
+
+    <div class="login-bg"></div>
+
+    <main class="login-container">
+
+        <div class="login-box">
+
+            <div class="login-top">
+
+                <a href="index.html" class="login-logo">
+                    LZZ <span>SPORTSHOT</span>
+                </a>
+
+                <p class="section-tag">
+                    ÁREA ADMINISTRATIVA
+                </p>
+
+                <h1>
+                    Entrar no painel.
+                </h1>
+
+                <p class="login-desc">
+                    Acesso restrito ao administrador.
+                </p>
+
+            </div>
+
+            <form id="formLogin" class="login-form">
+
+                <div class="campo full">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Digite seu e-mail"
+                        required
+                    >
+
+                </div>
+
+                <div class="campo full">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        placeholder="Digite sua senha"
+                        required
+                    >
+
+                </div>
+
+                <button type="submit" class="btn-login">
+                    Entrar no painel
+                </button>
+
+            </form>
+
+            <div class="login-footer">
+
+                <a href="index.html">
+                    ← Voltar para o site
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <div id="toast-overlay" class="toast-overlay">
+
+        <div class="toast-box">
+
+            <p id="toast-msg"></p>
+
+            <button id="toast-btn">
+                OK
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/login.js"></script>
+
+</body>
+</html>
