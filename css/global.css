@@ -846,7 +846,7 @@ main{
     position:fixed;
     right:18px;
     bottom:18px;
-    width:36px;
+    width:55px;
     height:36px;
     display:flex;
     align-items:center;
@@ -1078,14 +1078,17 @@ main{
 
 .hero-highlights{
     position:absolute;
-    left:0;
-    bottom:70px;
+
+    left:50%;
+    transform:translateX(-50%);
+
+    bottom:-50px;
 
     display:grid;
-    grid-template-columns:repeat(3, 1fr);
+    grid-template-columns:repeat(3,1fr);
     gap:10px;
 
-    width:min(520px, 100%);
+    width:min(520px,100%);
 }
 
 .highlight-card{
