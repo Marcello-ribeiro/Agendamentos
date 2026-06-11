@@ -1493,3 +1493,16 @@ main{
         line-height:1;
     }
 }
+
+@media(max-width:620px){
+
+  .hero-text{
+        font-size:14px;
+        max-width:280px;
+    }
+
+     .hero-highlights{
+        display:none;
+    }
+
+}
