@@ -777,7 +777,7 @@ function renderizarPreviews() {
             <img src="${foto.preview}" alt="">
 
             <div class="preview-actions">
-                <button type="button" onclick="moverFoto(${index}, -1)"></button>
+                <button type="button" onclick="moverFoto(${index}, -1)">↑</button>
                 <button type="button" onclick="moverFoto(${index}, 1)">↓</button>
                 <button type="button" class="remove" onclick="removerFoto(${index})">×</button>
             </div>
