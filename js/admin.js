@@ -593,7 +593,7 @@ formPortfolio?.addEventListener("submit", async (e) => {
     const tamanho = document.querySelector("#portfolioTamanho").value;
     const ordem = Number(document.querySelector("#portfolioOrdem").value || 0);
     const ativo = document.querySelector("#portfolioAtivo").checked;
-    const arquivos = document.querySelector("#portfolioImagens").files;
+    const arquivos = fotosSelecionadas.map(f => f.file);
 
     let portfolioId = id;
 
@@ -638,6 +638,8 @@ formPortfolio?.addEventListener("submit", async (e) => {
     formPortfolio.reset();
     document.querySelector("#portfolioId").value = "";
     document.querySelector("#portfolioAtivo").checked = true;
+    fotosSelecionadas = [];
+    previewFotos.innerHTML = "";
 
     await carregarPortfolioAdmin();
 });
