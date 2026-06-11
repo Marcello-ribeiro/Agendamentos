@@ -740,3 +740,70 @@ document.addEventListener("DOMContentLoaded", async () => {
     await carregarAgendamentos();
     await carregarPortfolioAdmin();
 });
+
+const inputFotos = document.getElementById("portfolioImagens");
+const previewFotos = document.getElementById("previewFotos");
+
+let fotosSelecionadas = [];
+
+if(inputFotos && previewFotos){
+    inputFotos.addEventListener("change", () => {
+        const novasFotos = Array.from(inputFotos.files);
+
+        novasFotos.forEach(file => {
+            fotosSelecionadas.push({
+                file,
+                preview: URL.createObjectURL(file)
+            });
+        });
+
+        inputFotos.value = "";
+        renderizarPreviews();
+    });
+}
+
+function renderizarPreviews() {
+    previewFotos.innerHTML = "";
+
+    fotosSelecionadas.forEach((foto, index) => {
+
+        const item = document.createElement("div");
+
+        item.className = "preview-item";
+
+        item.innerHTML = `
+            <span class="preview-ordem">${index + 1}</span>
+
+            <img src="${foto.preview}" alt="">
+
+            <div class="preview-actions">
+                <button type="button" onclick="moverFoto(${index}, -1)"></button>
+                <button type="button" onclick="moverFoto(${index}, 1)">↓</button>
+                <button type="button" class="remove" onclick="removerFoto(${index})">×</button>
+            </div>
+        `;
+
+        previewFotos.appendChild(item);
+    });
+}
+
+function moverFoto(index, direcao){
+
+    const novoIndex = index + direcao;
+
+    if(novoIndex < 0 || novoIndex >= fotosSelecionadas.length){
+        return;
+    }
+
+    [fotosSelecionadas[index], fotosSelecionadas[novoIndex]] =
+    [fotosSelecionadas[novoIndex], fotosSelecionadas[index]];
+
+    renderizarPreviews();
+}
+
+function removerFoto(index){
+
+    fotosSelecionadas.splice(index, 1);
+
+    renderizarPreviews();
+}
