@@ -879,3 +879,97 @@ document.addEventListener("DOMContentLoaded", () => {
     iniciarCarrosseis();
     carregarHorariosPublicos();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const lightbox = document.createElement("div");
+    lightbox.className = "lightbox";
+
+    lightbox.innerHTML = `
+        <div class="lightbox-box">
+            <button class="lightbox-fechar" type="button">×</button>
+
+            <button class="lightbox-nav lightbox-prev" type="button">‹</button>
+
+            <img src="" alt="Foto completa" class="lightbox-img">
+
+            <button class="lightbox-nav lightbox-next" type="button">›</button>
+
+            <div class="lightbox-contador">
+                <span id="lightboxAtual">1</span> / <span id="lightboxTotal">1</span>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(lightbox);
+
+    const lightboxImg = lightbox.querySelector(".lightbox-img");
+    const fecharLightbox = lightbox.querySelector(".lightbox-fechar");
+    const btnPrev = lightbox.querySelector(".lightbox-prev");
+    const btnNext = lightbox.querySelector(".lightbox-next");
+    const contadorAtual = lightbox.querySelector("#lightboxAtual");
+    const contadorTotal = lightbox.querySelector("#lightboxTotal");
+
+    let imagensAtuais = [];
+    let indexAtual = 0;
+
+    function atualizarLightbox(){
+        lightboxImg.src = imagensAtuais[indexAtual].src;
+        contadorAtual.innerText = indexAtual + 1;
+        contadorTotal.innerText = imagensAtuais.length;
+    }
+
+    function abrirLightbox(imgClicada){
+        const carrossel = imgClicada.closest(".carrossel");
+
+        imagensAtuais = Array.from(carrossel.querySelectorAll("img"));
+        indexAtual = imagensAtuais.indexOf(imgClicada);
+
+        atualizarLightbox();
+        lightbox.classList.add("ativo");
+    }
+
+    function fechar(){
+        lightbox.classList.remove("ativo");
+        lightboxImg.src = "";
+    }
+
+    document.addEventListener("click", (e) => {
+        const img = e.target.closest(".carrossel img");
+
+        if (!img) return;
+
+        abrirLightbox(img);
+    });
+
+    btnNext.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        indexAtual++;
+
+        if(indexAtual >= imagensAtuais.length){
+            indexAtual = 0;
+        }
+
+        atualizarLightbox();
+    });
+
+    btnPrev.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        indexAtual--;
+
+        if(indexAtual < 0){
+            indexAtual = imagensAtuais.length - 1;
+        }
+
+        atualizarLightbox();
+    });
+
+    fecharLightbox.addEventListener("click", fechar);
+
+    lightbox.addEventListener("click", (e) => {
+        if(e.target === lightbox){
+            fechar();
+        }
+    });
+});

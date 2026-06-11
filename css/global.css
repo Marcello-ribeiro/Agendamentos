@@ -1506,3 +1506,146 @@ main{
     }
 
 }
+
+.carrossel img{
+    cursor:zoom-in;
+}
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999999;
+    padding:24px;
+    background:
+        radial-gradient(circle at top left, rgba(56,189,248,.18), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(37,99,235,.22), transparent 35%),
+        rgba(2,6,23,.94);
+    backdrop-filter:blur(18px);
+}
+
+.lightbox.ativo{
+    display:flex;
+}
+
+.lightbox-box{
+    position:relative;
+    width:min(980px, 100%);
+    height:min(88vh, 760px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    border-radius:28px;
+    background:
+        linear-gradient(180deg, rgba(15,23,42,.78), rgba(2,6,23,.92));
+    border:1px solid rgba(56,189,248,.24);
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.65),
+        inset 0 0 0 1px rgba(255,255,255,.04);
+}
+
+.lightbox-img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    border-radius:20px;
+    box-shadow:0 24px 70px rgba(0,0,0,.55);
+}
+
+.lightbox-fechar{
+    position:absolute;
+    top:-16px;
+    right:-16px;
+    width:35px;
+    height:35px;
+    border:none;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--blue-bt1), #60a5fa49);
+    color:#020617;
+    font-size:28px;
+    font-weight:900;
+    cursor:pointer;
+    z-index:3;
+}
+
+.lightbox-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:50%;
+    background:rgba(2,6,23,.72);
+    border:1px solid rgba(56,189,248,.28);
+    color:white;
+    font-size:34px;
+    cursor:pointer;
+    z-index:3;
+    backdrop-filter:blur(12px);
+}
+
+.lightbox-nav:hover{
+    background:var(--blue);
+    color:#020617;
+}
+
+.lightbox-prev{
+    left:18px;
+}
+
+.lightbox-next{
+    right:18px;
+}
+
+.lightbox-contador{
+    position:absolute;
+    left:50%;
+    bottom:-18px;
+    transform:translateX(-50%);
+    padding:9px 16px;
+    border-radius:999px;
+    background:rgba(2,6,23,.9);
+    border:1px solid rgba(56,189,248,.22);
+    color:var(--soft);
+    font-size:12px;
+    font-weight:800;
+}
+
+@media(max-width:620px){
+    .lightbox{
+        padding:14px;
+    }
+
+    .lightbox-box{
+        height:82vh;
+        padding:10px;
+        border-radius:22px;
+    }
+
+    .lightbox-img{
+        border-radius:16px;
+    }
+
+    .lightbox-nav{
+        width:42px;
+        height:42px;
+        font-size:30px;
+    }
+
+    .lightbox-prev{
+        left:10px;
+    }
+
+    .lightbox-next{
+        right:10px;
+    }
+
+    .lightbox-fechar{
+        top:10px;
+        right:10px;
+    }
+}
